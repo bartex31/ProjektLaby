@@ -1,56 +1,72 @@
-import buildings.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameLoop {
-    tartak tartak = new tartak();
-    mine mine = new mine();
-    mlyn mlyn = new mlyn();
-    building[] buildings = {tartak, mine , mlyn};
+    char[][] map;
+    char[][] mapEmtity;
+    int sizeMapx, sizeMapy;
+    ArrayList<grass> grass = new ArrayList<grass>();
 
 
     public static void main(String[] args) {
-
-
-        stockpile stock = new stockpile(0, 0, 0, 0);
         GameLoop g = new GameLoop();
-        g.gameLopp(stock);
+        g.sizeMapx = 400;
+        g.sizeMapy = 400;
+        g.map = new char[g.sizeMapx][g.sizeMapy];
+        g.mapEmtity = new char[g.sizeMapx][g.sizeMapy];
+        g.worldGen();
+
+        g.gameLopp();
+
+    }
+    private void worldGen() {
+        for (int x = 0; x < sizeMapx; x++) {
+            for (int y = 0; y < sizeMapy; y++) {
+                int rand = (int) (Math.random() *5);
+                map[x][y] = ' ';
+                if (rand == 1) {
+                    grass.add(new grass(x,y, map));
+                }
+            }
+        }
     }
 
-    public void gameLopp(stockpile stock) {
+    static void addEntity(){
+
+    }
+    public void gameLopp() {
 
         boolean loop = true;
+
         int day =0;
         Scanner sc = new Scanner(System.in);
         while (loop) {
             System.out.println("dzień = " + day);
-
+            for(grass g : grass) {
+                g.update(map);
+            }
             int input = Integer.parseInt(sc.nextLine());
             if (input == 1) {
-                showResouces(stock);
+                writeMap();
+
             }
-            if (input == 2) {
-                showBuilding(buildings);
-            }
-
-
-
 
             if (day > 10) loop = false;
             day++;
         }
 
     }
-    private void showResouces(stockpile res) {
-        System.out.println("stan surowców wynosi: ");
-        System.out.print("żywność = " +res.getFood());
-        System.out.print(" drewno = "+ res.getWood());
-        System.out.print(" kamien = " +res.getStone());
-        System.out.println(" populacja = "+res.getManpower() +'\n');
+    public void setMap(int x, int y, char z){
+        map[x][y] = z;
     }
-    private void showBuilding(building[] building) {
-        for(building b : building) {
-            System.out.println("liczba " + b.name + " = " + b.getCount());
+    private void writeMap(){
+        for (int x = 0; x < sizeMapx; x++) {
+            for (int y = 0; y < sizeMapy; y++) {
+                System.out.print(map[x][y] + " ");
+            }
+            System.out.println();
         }
     }
+
 }
