@@ -16,7 +16,7 @@ public class grass {
             growth++;
         }
 
-        if(growth == 4){
+        if(growth == 1){
             growth = 0;
             random = (int)(Math.random()*4);
             if(random == 0 && y+1 < grass.length){
