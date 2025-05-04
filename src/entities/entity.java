@@ -7,7 +7,9 @@ public abstract class entity {
     public int x;
     public int y;
 
-    abstract public void update();
+
+    abstract public void update(char[][] enitities);
+
     abstract public void die();
 
 }

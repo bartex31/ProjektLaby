@@ -11,8 +11,7 @@ public class wolf extends entity {
     }
 
     @Override
-    public void update() {
-        System.out.println("test");
+    public void update(char[][] enitities) {
         if (hunger>0) {
             hunger =hunger -10;
         }
@@ -24,6 +23,32 @@ public class wolf extends entity {
         }
         if (health <= 0) {
             this.die();
+        }
+        int rand  = (int) (Math.random() * 2);
+
+        if (rand == 0){
+            rand = (int)(Math.random()*4);
+            if(rand == 0 && y+1 < enitities.length){
+                if (enitities[x][y+1] != 'w'){
+                    enitities[x][y] = ' ';
+                    enitities[x][y+1] = 'w';
+                }
+            }else if (rand == 1 && x+1 < enitities[0].length){
+                if (enitities[x+1][y] != 'w'){
+                    enitities[x][y] = ' ';
+                    enitities[x+1][y] = 'w';
+                }
+            }else if (rand == 2 && y-1 >= 0) {
+                if (enitities[x][y-1] != 'w'){
+                    enitities[x][y] = ' ';
+                    enitities[x][y-1] = 'w';
+                }
+            }else if (rand == 3 && x-1 >=0){
+                if (enitities[x-1][y] != 'w'){
+                    enitities[x][y] = ' ';
+                    enitities[x-1][y] = 'w';
+                }
+            }
         }
     }
 

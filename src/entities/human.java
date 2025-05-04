@@ -10,8 +10,8 @@ public class human extends entity {
     }
 
     @Override
-    public void update() {
-        System.out.println("test1");
+    public void update(char[][] enitities) {
+       // System.out.println("test1");
     }
     @Override
     public void die() {

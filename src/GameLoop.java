@@ -13,8 +13,8 @@ public class GameLoop {
 
     public static void main(String[] args) {
         GameLoop g = new GameLoop();
-        g.sizeMapx = 40;
-        g.sizeMapy = 40;
+        g.sizeMapx = 10;
+        g.sizeMapy = 10;
         g.map = new char[g.sizeMapx][g.sizeMapy];
         g.mapEmtity = new char[g.sizeMapx][g.sizeMapy];
 
@@ -26,7 +26,7 @@ public class GameLoop {
     private void worldGen() {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
-                int rand = (int) (Math.random() *5);
+                int rand = (int) (Math.random() *115);
                 map[x][y] = ' ';
                 mapEmtity[x][y] = ' ';
                 if (rand == 1) {
@@ -36,9 +36,9 @@ public class GameLoop {
         }
     }
     private void entityGen() {
-        int wolf = 40;
-        int human =10;
-        int sheep = 20;
+        int wolf = 1;
+        int human =1;
+        int sheep = 1;
         int randx, randy;
 
         for (int x = 0; x < wolf; x++) {
@@ -46,7 +46,6 @@ public class GameLoop {
             randy = (int) (Math.random() *sizeMapy);
             entities.add(new wolf(randx,randy));
             mapEmtity[randx][randy] = 'w';
-
         }
         for (int x = 0; x < human; x++) {
             randx = (int) (Math.random() *sizeMapx);
@@ -76,12 +75,11 @@ public class GameLoop {
             for(grass g : grass) {
                 g.update(map);
             }
-            int input = Integer.parseInt(sc.nextLine());
-            if (input == 1) {
-                writeMap();
-
+            for(entity e : entities) {
+                e.update(mapEmtity);
             }
-
+            int input = Integer.parseInt(sc.nextLine());
+            if (input == 1) writeMap();
             if (day > 10) loop = false;
             day++;
         }
@@ -103,10 +101,5 @@ public class GameLoop {
             }
             System.out.println();
         }
-        if(map[0][0] == ' '){
-            System.out.print("puste ");
-        }
     }
-
-
 }
