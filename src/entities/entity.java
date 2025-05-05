@@ -1,17 +1,31 @@
 package entities;
 
+import Game.GameLoop;
+
+import java.awt.*;
+
 public abstract class entity {
-    public int health;
-    public int hunger;
+
     public String name;
-    public int x;
-    public int y;
+    protected int x;
+    protected int y;
+    public char[][] mapEmtity;
+    protected GameLoop game;
 
 
-    abstract public void update(char[][] enitities);
+    abstract public void update();
+    public void move(int ax, int ay) {
 
-    abstract public void die();
-
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void die(){
+        game.despawnEntity(this);
+    }
 }
 
 
