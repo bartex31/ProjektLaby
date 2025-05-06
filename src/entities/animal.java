@@ -17,7 +17,7 @@ public class animal extends entity{
 
     
     public void populate() {
-
+       game.
     }
 
     
