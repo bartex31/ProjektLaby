@@ -16,12 +16,18 @@ public class Game {
 
     public static void main(String[] args) {
         Game g = new Game();
-        g.sizeMapx = 2;
-        g.sizeMapy = 2;
+        g.sizeMapx = 20;
+        g.sizeMapy = 20;
         g.terrain = new char[g.sizeMapx][g.sizeMapy];
         g.mapemtity = new char[g.sizeMapx][g.sizeMapy];
         g.worldGen();
-        g.entityGen();
+        System.out.println();
+        g.entityGen(5,'s');
+        System.out.println();
+        g.entityGen(5,'w');
+        System.out.println();
+        g.entityGen(5,'h');
+        System.out.println();
         g.gameLopp();
     }
 
@@ -51,34 +57,23 @@ public class Game {
                 int rand = (int) (Math.random() * 14);
                 this.terrain[x][y] = ' ';
                 this.mapemtity[x][y] = ' ';
-//                if (rand == 0) {
-//                    spawnEntity(x,y,'g');
-//                }
+                if (rand == 0) {
+                    spawnEntity(x,y,'g');
+                }
             }
         }
     }
 
-    private void entityGen() {
-        int wolf = 2;
-        int human = 2;
-        int sheep = 2;
+    private void entityGen(int count , char type) {
+        int counted =0;
         int randx, randy;
+        while (counted<  count){
 
-        for (int x = 0; x < wolf; x++) {
             randx = (int) (Math.random() * sizeMapx);
             randy = (int) (Math.random() * sizeMapy);
-            spawnEntity(randx, randy, 'w');
+            System.out.println("spawn" + randx +" " + randy + " " + type);
+            if(spawnEntity(randx, randy, type)) counted++;
         }
-//        for (int x = 0; x < human; x++) {
-//            randx = (int) (Math.random() * sizeMapx);
-//            randy = (int) (Math.random() * sizeMapy);
-//            spawnEntity(randx, randy, 'h');
-//        }
-//        for (int x = 0; x < sheep; x++) {
-//            randx = (int) (Math.random() * sizeMapx);
-//            randy = (int) (Math.random() * sizeMapy);
-//            spawnEntity(randx, randy, 's');
-//        }
     }
 
 
@@ -89,6 +84,7 @@ public class Game {
 
     private void writeMap() {
         for (int y = 0; y < sizeMapy;y++) {
+            System.out.print("| ");
             for (int x = 0; x < sizeMapx; x++) {
                 char temp;
                 if (this.mapemtity[x][y] != ' ') {
@@ -97,7 +93,7 @@ public class Game {
                     temp = this.terrain[x][y];
                 } else temp = ' ';
                 //temp = this.terrain[x][y];
-                //temp = mapemtity[x][y];
+                temp = mapemtity[x][y];
                 System.out.print(temp + " | ");
             }
 //            System.out.println();
@@ -115,7 +111,8 @@ public class Game {
 
 
 
-    public void spawnEntity(int x, int y, char type) {
+    public boolean spawnEntity(int x, int y, char type) {
+        if(type != 'g' && mapemtity[x][y] != ' ') return false;
         switch (type) {
             case 'g':
                 grass g = new grass(x, y, this);
@@ -126,6 +123,7 @@ public class Game {
                 entities.add(h);
                 break;
             case 's':
+                System.out.println("ustawiam " + x + " " + y + " " + type);
                 sheep s = new sheep(x, y, this);
                 entities.add(s);
                 break;
@@ -136,6 +134,7 @@ public class Game {
             default:
                 break;
         }
+        return true;
     }
 
 

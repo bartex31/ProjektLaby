@@ -23,17 +23,17 @@ public class wolf extends animal {
             isHunting = true;
             health = health - 20;
         }
-//        if (health <= 0) {
-//            this.die();
-//        }
+        if (health <= 0) {
+            this.die();
+        }
         if (isHunting) {
             //wyszukiwanie owcy i ruch w jego strone i return
         }
 
-        int rand  = (int) (Math.random() * 1);
+        int rand  = (int) (Math.random() * 5);
         //gdy nie jest głodny randomi sie porusza
         if (rand == 0){
-            System.out.println(x + " " + y );
+            //System.out.println(x + " " + y );
             pos pos = randpos();
             move(pos.x,pos.y, 'w');
         }

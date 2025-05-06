@@ -30,7 +30,7 @@ public class human extends animal {
             //wyszukiwanie owcy i ruch w jego strone i return
         }
 
-        int rand  = (int) (Math.random() * 1);
+        int rand  = (int) (Math.random() * 5);
         //gdy nie jest głodny randomi sie porusza
         if (rand == 0){
             pos pos = randpos();

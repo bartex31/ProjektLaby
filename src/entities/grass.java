@@ -18,7 +18,7 @@ public class grass extends entity {
     public void update() {
         int random = (int)(Math.random()*3);
         if(random == 1) this.growth++;
-        if(this.growth == 2){
+        if(this.growth == 52){
             growth = 0;
             for (dir dr: dir.values()) {
                 int ax = x+ dr.ax;
