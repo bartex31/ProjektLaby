@@ -18,4 +18,8 @@ public class human extends animal {
     public void update() {
        // System.out.println("test1");
     }
+public void poluj(){
+//szukaj i poluj na owce wilki
+
+}
 }
