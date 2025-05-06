@@ -19,6 +19,12 @@ public class sheep extends animal{
 
         //System.out.println("test1");
     }
+
+public void eatgrass(){
+//szukanie trawy i jej jedzenie
+
+
+}
     
 
 
