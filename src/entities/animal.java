@@ -14,11 +14,14 @@ public class animal extends entity{
     }
 
     public void move(int ax, int ay, char type) {
-        if (game.checkborder(x +ax,y+ay)) {
+
+        if (game.checkborder(x +ax,y+ay) && game.getMapemtity()[x +ax][y+ay] == ' ') {
+            System.out.printf("move z (%d,%d) na (%d,%d)\n",x,y,x + ax, y + ay);
             game.setMapentity(x, y, ' ');
-            game.setMapentity(x + ax, y + ay, 'w');
+
             this.x += ax;
             this.y += ay;
+            game.setMapentity(x , y , 'w');
         }
     }
 

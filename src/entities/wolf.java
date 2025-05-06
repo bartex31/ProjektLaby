@@ -10,7 +10,7 @@ public class wolf extends animal {
         this.food = 100;
         this.name = "Wolf";
         this.game = game;
-        this.game.changeTerrain(x,y,'w');
+        this.game.setMapentity(x,y,'w');
     }
 
     @Override
@@ -23,9 +23,9 @@ public class wolf extends animal {
             isHunting = true;
             health = health - 20;
         }
-        if (health <= 0) {
-            this.die();
-        }
+//        if (health <= 0) {
+//            this.die();
+//        }
         if (isHunting) {
             //wyszukiwanie owcy i ruch w jego strone i return
         }
@@ -33,6 +33,7 @@ public class wolf extends animal {
         int rand  = (int) (Math.random() * 1);
         //gdy nie jest głodny randomi sie porusza
         if (rand == 0){
+            System.out.println(x + " " + y );
             pos pos = randpos();
             move(pos.x,pos.y, 'w');
         }

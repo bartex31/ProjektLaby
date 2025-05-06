@@ -11,7 +11,7 @@ public class human extends animal {
         this.food = 100;
         this.name = "human";
         this.game = game;
-        this.game.changeTerrain(x,y,'h');
+        this.game.setMapentity(x,y,'h');
     }
 
     @Override

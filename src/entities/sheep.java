@@ -12,7 +12,7 @@ public class sheep extends animal{
         this.food = 100;
         this.name = "Sheep";
         this.game = game;
-        this.game.changeTerrain(x,y,'s');
+        this.game.setMapentity(x,y,'s');
     }
 
     @Override

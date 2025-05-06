@@ -16,8 +16,8 @@ public class Game {
 
     public static void main(String[] args) {
         Game g = new Game();
-        g.sizeMapx = 4;
-        g.sizeMapy = 4;
+        g.sizeMapx = 2;
+        g.sizeMapy = 2;
         g.terrain = new char[g.sizeMapx][g.sizeMapy];
         g.mapemtity = new char[g.sizeMapx][g.sizeMapy];
         g.worldGen();
@@ -51,9 +51,9 @@ public class Game {
                 int rand = (int) (Math.random() * 14);
                 this.terrain[x][y] = ' ';
                 this.mapemtity[x][y] = ' ';
-                if (rand == 0) {
-                    spawnEntity(x,y,'g');
-                }
+//                if (rand == 0) {
+//                    spawnEntity(x,y,'g');
+//                }
             }
         }
     }
@@ -69,16 +69,16 @@ public class Game {
             randy = (int) (Math.random() * sizeMapy);
             spawnEntity(randx, randy, 'w');
         }
-        for (int x = 0; x < human; x++) {
-            randx = (int) (Math.random() * sizeMapx);
-            randy = (int) (Math.random() * sizeMapy);
-            spawnEntity(randx, randy, 'h');
-        }
-        for (int x = 0; x < sheep; x++) {
-            randx = (int) (Math.random() * sizeMapx);
-            randy = (int) (Math.random() * sizeMapy);
-            spawnEntity(randx, randy, 's');
-        }
+//        for (int x = 0; x < human; x++) {
+//            randx = (int) (Math.random() * sizeMapx);
+//            randy = (int) (Math.random() * sizeMapy);
+//            spawnEntity(randx, randy, 'h');
+//        }
+//        for (int x = 0; x < sheep; x++) {
+//            randx = (int) (Math.random() * sizeMapx);
+//            randy = (int) (Math.random() * sizeMapy);
+//            spawnEntity(randx, randy, 's');
+//        }
     }
 
 
@@ -88,18 +88,22 @@ public class Game {
 
 
     private void writeMap() {
-        for (int x = 0; x < sizeMapx; x++) {
-            for (int y = 0; y < sizeMapy; y++) {
+        for (int y = 0; y < sizeMapy;y++) {
+            for (int x = 0; x < sizeMapx; x++) {
                 char temp;
-                if (mapemtity[x][y] != ' ') {
-                    temp = mapemtity[x][y];
-                } else if (terrain[x][y] != ' ') {
-                    temp = terrain[x][y];
+                if (this.mapemtity[x][y] != ' ') {
+                    temp = this.mapemtity[x][y];
+                } else if (this.terrain[x][y] != ' ') {
+                    temp = this.terrain[x][y];
                 } else temp = ' ';
-                temp = this.terrain[x][y];
+                //temp = this.terrain[x][y];
                 //temp = mapemtity[x][y];
-                System.out.print(temp + " ");
+                System.out.print(temp + " | ");
             }
+//            System.out.println();
+//            for (int z = 0; z < sizeMapx*2; z++) {
+//                System.out.print("--");
+//            }
             System.out.println();
         }
     }
@@ -140,7 +144,7 @@ public class Game {
             terrain[et.getX()][et.getY()] = ' ';
         }
         if (et instanceof animal) {
-            mapemtity[et.getY()][et.getX()] = ' ';
+            mapemtity[et.getX()][et.getY()] = ' ';
         }
         entities.remove(et);
     }
@@ -149,7 +153,9 @@ public class Game {
     public char[][] getMapemtity() {
         return mapemtity;
     }
+
     public void setMapentity(int ax, int ay, char type) {
+        System.out.println("ustawiam " + ax + " " + ay + " " + type);
         this.mapemtity[ax][ay] = type;
     }
 
