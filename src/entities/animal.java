@@ -16,8 +16,8 @@ public class animal extends entity{
 
 
     
-    public void populate() {
-       game.
+    public void populate(char type) {
+       game.spawnEntity(x,y,type);
     }
 
     
@@ -32,6 +32,7 @@ public class animal extends entity{
     public pos randpos(){
         return new pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
     }
+
 public pos findnearest(char type){
 
 }
