@@ -17,8 +17,8 @@ public class GameLoop {
 
     public static void main(String[] args) {
         GameLoop g = new GameLoop();
-        g.sizeMapx = 10;
-        g.sizeMapy = 10;
+        g.sizeMapx = 4;
+        g.sizeMapy = 4;
         g.terrain = new char[g.sizeMapx][g.sizeMapy];
         g.mapemtity = new char[g.sizeMapx][g.sizeMapy];
 

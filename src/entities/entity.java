@@ -14,7 +14,9 @@ public abstract class entity {
 
 
     abstract public void update();
+    public void move(int ax, int ay) {
 
+    }
     public int getX() {
         return x;
     }

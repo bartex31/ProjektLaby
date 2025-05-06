@@ -1,5 +1,6 @@
 package entities;
 import Game.GameLoop;
+import Game.pos;
 
 public class wolf extends animal {
     char[][] map;
@@ -38,25 +39,8 @@ public class wolf extends animal {
         int rand  = (int) (Math.random() * 1);
 
         if (rand == 0){
-            rand = (int)(Math.random()*4);
-            if(rand == 0 && y+1 < map.length){
-                if (map[x][y+1] != 'w'){
-                    move(0,1,'w');
-                }
-            }else if (rand == 1 && x+1 < map[0].length){
-                if (map[x+1][y] != 'w'){
-                    move(1,0,'w');
-                }
-            }else if (rand == 2 && y-1 >= 0) {
-                if (map[x][y-1] != 'w'){
-                    move(0,-1,'w');
-                }
-            }else if (rand == 3 && x-1 >=0){
-                if (map[x-1][y] != 'w'){
-                    move(-1,0,'w');
-                }
-            }
-
+            pos pos = randpos();
+            move(pos.x,pos.y, 'w');
         }
     }
     public void hunt(){

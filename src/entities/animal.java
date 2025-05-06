@@ -1,6 +1,8 @@
 package entities;
 
 import Game.GameLoop;
+import Game.pos;
+import java.sql.Struct;
 
 public class animal extends entity{
     public int health;
@@ -20,9 +22,17 @@ public class animal extends entity{
 
     
     public void move(int ax, int ay, char type) {
-        game.setMapentity(x,y, ' ');
-        game.setMapentity(x +ax,y+ay, 'w');
-        this.x += ax;
-        this.y += ay;
+        if (game.checkborder(x +ax,y+ay)) {
+            game.setMapentity(x, y, ' ');
+            game.setMapentity(x + ax, y + ay, 'w');
+            this.x += ax;
+            this.y += ay;
+        }
     }
+    public pos randpos(){
+        return new pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
+    }
+
+
 }
+
