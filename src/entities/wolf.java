@@ -5,6 +5,7 @@ import Game.pos;
 public class wolf extends animal {
     char[][] map;
     boolean isHunting = false;
+    pos target;
 
     public wolf(int x, int y, GameLoop game) {
         this.x = x;
@@ -25,9 +26,7 @@ public class wolf extends animal {
         }
         if (hunger < 30){
             isHunting = true;
-        }
-        if (hunger <= 10){
-            health = health - 10;
+            health = health - 20;
         }
         if (health <= 0) {
             this.die();
@@ -37,7 +36,7 @@ public class wolf extends animal {
         }
 
         int rand  = (int) (Math.random() * 1);
-
+//gdy nie jest głodny randomi sie porusza 
         if (rand == 0){
             pos pos = randpos();
             move(pos.x,pos.y, 'w');
