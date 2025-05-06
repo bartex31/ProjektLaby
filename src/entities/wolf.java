@@ -31,51 +31,33 @@ public class wolf extends animal {
         if (health <= 0) {
             this.die();
         }
+        if (isHunting) {
+            //wyszukiwanie owcy i ruch w jego strone i return
+        }
 
-        int rand  = (int) (Math.random() * 2);
+        int rand  = (int) (Math.random() * 1);
 
         if (rand == 0){
             rand = (int)(Math.random()*4);
             if(rand == 0 && y+1 < map.length){
                 if (map[x][y+1] != 'w'){
-                    map[x][y] = ' ';
-                    map[x][y+1] = 'w';
-                    this.y++;
+                    move(0,1,'w');
                 }
             }else if (rand == 1 && x+1 < map[0].length){
                 if (map[x+1][y] != 'w'){
-                    map[x][y] = ' ';
-                    map[x+1][y] = 'w';
-                    this.x++;
+                    move(1,0,'w');
                 }
             }else if (rand == 2 && y-1 >= 0) {
                 if (map[x][y-1] != 'w'){
-                    map[x][y] = ' ';
-                    map[x][y-1] = 'w';
-                    this.y--;
+                    move(0,-1,'w');
                 }
             }else if (rand == 3 && x-1 >=0){
                 if (map[x-1][y] != 'w'){
-                    map[x][y] = ' ';
-                    map[x-1][y] = 'w';
-                    this.x--;
+                    move(-1,0,'w');
                 }
             }
-            game.setMapentity(map);
+
         }
-    }
-
-    @Override
-    public void die() {
-
-    }
-    @Override
-    public void populate(){
-
-    }
-    @Override
-    public void move(int x, int y){
-
     }
     public void hunt(){
 

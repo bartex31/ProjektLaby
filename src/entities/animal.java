@@ -12,10 +12,6 @@ public class animal extends entity{
 
     }
 
-    
-    public void die() {
-
-    }
 
     
     public void populate() {
@@ -23,7 +19,10 @@ public class animal extends entity{
     }
 
     
-    public void move(int x, int y) {
-
+    public void move(int ax, int ay, char type) {
+        game.setMapentity(x,y, ' ');
+        game.setMapentity(x +ax,y+ay, 'w');
+        this.x += ax;
+        this.y += ay;
     }
 }

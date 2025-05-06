@@ -16,6 +16,7 @@ public class sheep extends animal{
 
     @Override
     public void update() {
+
         //System.out.println("test1");
     }
     @Override
@@ -27,8 +28,5 @@ public class sheep extends animal{
 
     }
 
-    @Override
-    public void move(int x, int y) {
 
-    }
 }

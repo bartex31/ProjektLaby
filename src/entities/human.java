@@ -27,10 +27,6 @@ public class human extends animal {
 
     }
 
-    @Override
-    public void move(int x, int y) {
-
-    }
 
 
 }

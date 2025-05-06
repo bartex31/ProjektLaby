@@ -102,13 +102,13 @@ public class GameLoop {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
                 char temp;
-                if (mapemtity[x][y] != ' ') {
-                    temp = mapemtity[x][y];
-                } else if (terrain[x][y] != ' ') {
-                    temp = terrain[x][y];
-                } else temp = ' ';
-                temp = this.terrain[x][y];
-
+//                if (mapemtity[x][y] != ' ') {
+//                    temp = mapemtity[x][y];
+//                } else if (terrain[x][y] != ' ') {
+//                    temp = terrain[x][y];
+//                } else temp = ' ';
+//                temp = this.terrain[x][y];
+                temp = mapemtity[x][y];
                 System.out.print(temp + " ");
             }
             System.out.println();
@@ -155,13 +155,17 @@ public class GameLoop {
     public char[][] getMapemtity() {
         return mapemtity;
     }
-    public void setMapentity(char[][] mapemtity) {
-        this.mapemtity = mapemtity;
+    public void setMapentity(int ax, int ay, char type) {
+        System.out.println(ax + " " + ay + " " + type);
+        this.mapemtity[ax][ay] = type;
     }
+
+
 
     public void addEmtity(entity entity) {
         this.entities.add(entity);
     }
+
 
     public ArrayList<entity> getEntities() {
         return entities;
@@ -169,6 +173,7 @@ public class GameLoop {
     public void setEntities(ArrayList<entity> entities) {
         this.entities = entities;
     }
+
 
     public char[][] getTerrain() {
         return terrain;
