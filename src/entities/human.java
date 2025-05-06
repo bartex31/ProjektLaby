@@ -18,15 +18,4 @@ public class human extends animal {
     public void update() {
        // System.out.println("test1");
     }
-    @Override
-    public void die() {
-
-    }
-    @Override
-    public void populate(){
-
-    }
-
-
-
 }
