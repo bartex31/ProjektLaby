@@ -19,14 +19,7 @@ public class sheep extends animal{
 
         //System.out.println("test1");
     }
-    @Override
-    public void die() {
-
-    }
-    @Override
-    public void populate(){
-
-    }
+    
 
 
 }
