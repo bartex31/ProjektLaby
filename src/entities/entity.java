@@ -1,16 +1,12 @@
 package entities;
 
-import Game.GameLoop;
-
-import java.awt.*;
+import Game.Game;
 
 public abstract class entity {
-
     public String name;
     protected int x;
     protected int y;
-    public char[][] mapEmtity;
-    protected GameLoop game;
+    protected Game game;
 
 
     abstract public void update();
