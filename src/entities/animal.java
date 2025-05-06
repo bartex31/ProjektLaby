@@ -32,6 +32,9 @@ public class animal extends entity{
     public pos randpos(){
         return new pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
     }
+public pos findnearest(char type){
+
+}
 
 
 }
