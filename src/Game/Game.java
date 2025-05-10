@@ -93,7 +93,7 @@ public class Game {
                     temp = this.terrain[x][y];
                 } else temp = ' ';
                 //temp = this.terrain[x][y];
-                temp = mapemtity[x][y];
+                //temp = mapemtity[x][y];
                 System.out.print(temp + " | ");
             }
 //            System.out.println();
