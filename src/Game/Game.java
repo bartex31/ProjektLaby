@@ -16,17 +16,28 @@ public class Game {
 
     public static void main(String[] args) {
         Game g = new Game();
-        g.sizeMapx = 20;
-        g.sizeMapy = 20;
-        g.terrain = new char[g.sizeMapx][g.sizeMapy];
-        g.mapemtity = new char[g.sizeMapx][g.sizeMapy];
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Podaj szerokość planszy: ");
+        int width = Integer.parseInt(sc.nextLine());
+        System.out.print("Podaj wysokość planszy: ");
+        int height = Integer.parseInt(sc.nextLine());
+        System.out.print("Podaj liczbę owiec: ");
+        int sheepCount = Integer.parseInt(sc.nextLine());
+        System.out.print("Podaj liczbę wilków: ");
+        int wolfCount = Integer.parseInt(sc.nextLine());
+        System.out.print("Podaj liczbę ludzi: ");
+        int humanCount = Integer.parseInt(sc.nextLine());
+        g.sizeMapx = width;
+        g.sizeMapy = height;
+        g.terrain = new char[width][height];
+        g.mapemtity = new char[width][height];
         g.worldGen();
         System.out.println();
-        g.entityGen(5,'s');
+        g.entityGen(sheepCount, 's');
         System.out.println();
-        g.entityGen(5,'w');
+        g.entityGen(wolfCount, 'w');
         System.out.println();
-        g.entityGen(5,'h');
+        g.entityGen(humanCount, 'h');
         System.out.println();
         g.gameLopp();
     }
