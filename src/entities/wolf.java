@@ -3,6 +3,7 @@ import Game.Game;
 import Game.pos;
 
 public class wolf extends animal {
+    char[] targets = {'s','h'};
     public wolf(int x, int y, Game game) {
         this.x = x;
         this.y = y;
@@ -27,6 +28,7 @@ public class wolf extends animal {
             this.die();
         }
         if (isHunting) {
+            hunt(targets);
             //wyszukiwanie owcy i ruch w jego strone i return
         }
 
@@ -38,8 +40,6 @@ public class wolf extends animal {
             move(pos.x,pos.y, 'w');
         }
     }
-    public void hunt(){
 
-    }
 
 }

@@ -4,7 +4,7 @@ import Game.Game;
 import Game.pos;
 
 public class sheep extends animal{
-
+    char[] targets = {'g'};
     public sheep(int x, int y, Game game) {
         this.x = x;
         this.y = y;
@@ -28,6 +28,7 @@ public class sheep extends animal{
             this.die();
         }
         if (isHunting) {
+            hunt(targets);
             //wyszukiwanie owcy i ruch w jego strone i return
         }
 

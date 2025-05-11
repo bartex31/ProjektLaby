@@ -5,7 +5,6 @@ import Game.pos;
 public class animal extends entity{
     public int health;
     public int food;
-    pos target;
     boolean isHunting = false;
 
 
@@ -29,11 +28,41 @@ public class animal extends entity{
         return new pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
     }
 
-    public pos findnearest(char type){
-        int ax, ay;
-        return new pos(1, 1);
+    public pos findnearest(char[] target){
+        char[][] terrain = game.getTerrain();
+        for (int range = 1; range <= Math.max(terrain.length, terrain[0].length); range++) {
+            for (int dx = -range; dx <= range; dx++) {
+                int ax = x + dx;
+                for (int dy = -range; dy <= range; dy++) {
 
+                    int ay = y + dy;
+
+                    if (Math.abs(dx) == range || Math.abs(dy) == range) {
+                        if (game.checkborder(ax, ay)) {
+                            for(char t : target) {
+                                if (terrain[ax][ay] == t) {
+                                    return new pos(ax, ay);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
+    public void hunt(char[] target) {
+
+        pos pos = findnearest(target);
+        int ax, ay;
+        if (pos == null) {
+            return;
+        }
+
+
+      //  move();
+    }
+
 
     @Override
     public void update() {

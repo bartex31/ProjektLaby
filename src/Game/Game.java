@@ -95,7 +95,7 @@ public class Game {
 
     private void writeMap() {
         for (int y = 0; y < sizeMapy;y++) {
-            System.out.print("| ");
+             System.out.print("| ");
             for (int x = 0; x < sizeMapx; x++) {
                 char temp;
                 if (this.mapemtity[x][y] != ' ') {

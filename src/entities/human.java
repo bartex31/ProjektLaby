@@ -3,7 +3,7 @@ package entities;
 import Game.Game;
 import Game.pos;
 public class human extends animal {
-
+    char[] targets = {'s','w'};
     public human(int x, int y, Game game) {
         this.x = x;
         this.y = y;
@@ -27,6 +27,7 @@ public class human extends animal {
             this.die();
         }
         if (isHunting) {
+            hunt(targets);
             //wyszukiwanie owcy i ruch w jego strone i return
         }
 
