@@ -178,9 +178,19 @@ public class Game {
     public void despawnEntity(entity et) {
         if (et instanceof grass) {
             terrain[et.getX()][et.getY()] = ' ';
+            eatenGrass++;
         }
-        if (et instanceof animal) {
+        if (et instanceof sheep) {
             mapemtity[et.getX()][et.getY()] = ' ';
+            eatenSheep++;
+        }
+        if (et instanceof wolf) {
+            mapemtity[et.getX()][et.getY()] = ' ';
+            eatenWolves++;
+        }
+        if (et instanceof human) {
+            mapemtity[et.getX()][et.getY()] = ' ';
+            eatenHumans++;
         }
         entities.remove(et);
     }
