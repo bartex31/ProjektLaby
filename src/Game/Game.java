@@ -150,19 +150,23 @@ public class Game {
             case 'g':
                 grass g = new grass(x, y, this);
                 entities.add(g);
+                spawnedGrass++;
                 break;
             case 'h':
                 human h = new human(x, y, this);
                 entities.add(h);
+                spawnedHumans++;
                 break;
             case 's':
                 System.out.println("ustawiam " + x + " " + y + " " + type);
                 sheep s = new sheep(x, y, this);
                 entities.add(s);
+                spawnedSheep++;
                 break;
             case 'w':
                 wolf w = new wolf(x, y, this);
                 entities.add(w);
+                spawnedWolves++;
                 break;
             default:
                 break;
