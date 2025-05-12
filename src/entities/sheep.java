@@ -21,7 +21,8 @@ public class sheep extends animal{
         if (food >0) {
             food = food -10;
         }
-        if (food < 30){
+        if (food < 90){
+
             isHunting = true;
             health = health - 20;
         }
@@ -41,32 +42,6 @@ public class sheep extends animal{
         }
     }
 
-
-    public void eatgrass() {
-        char[][] terrain = game.getTerrain();
-        for (int range = 1; range <= Math.max(terrain.length, terrain[0].length); range++) {
-            for (int dx = -range; dx <= range; dx++) {
-                int ax = x + dx;
-                for (int dy = -range; dy <= range; dy++) {
-
-                    int ay = y + dy;
-
-                    if (Math.abs(dx) == range || Math.abs(dy) == range) {
-                        if (game.checkborder(ax, ay)) {
-                            if (terrain[ax][ay] == 'g') {
-                                game.changeTerrain(ax, ay, ' ');
-                                this.food += 30;
-                                if (this.food > 100) this.food = 100;
-                                this.isHunting = false;
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
 
 
 }

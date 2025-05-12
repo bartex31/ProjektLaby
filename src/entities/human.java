@@ -20,7 +20,7 @@ public class human extends animal {
         if (food >0) {
             food = food -10;
         }
-        if (food < 30){
+        if (food < 90){
             isHunting = true;
             health = health - 20;
         }
@@ -38,10 +38,6 @@ public class human extends animal {
             Pos pos = randpos();
             move(pos.x,pos.y, 'h');
         }
-    }
-
-    public void poluj(){
-        //szukaj i poluj na owce wilki
     }
 
 }

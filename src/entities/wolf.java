@@ -21,9 +21,10 @@ public class wolf extends animal {
         if (food >0) {
             food = food -10;
         }
-        if (food < 30){
+        if (food < 90){
+            System.out.println("poczatek polowania " + type);
             isHunting = true;
-            health = health - 20;
+            health = health - 10;
         }
         if (health <= 0) {
             this.die();
