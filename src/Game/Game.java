@@ -180,5 +180,23 @@ public class Game {
     public void changeTerrain(int x, int y, char z) {
         terrain[x][y] = z;
     }
+    public Pos check(int x , int y , char[] target) {
+        for (int dx = -1; dx <= 1; dx++) {
+            int ax = x + dx;
+            for (int dy = -1; dy <= 1; dy++) {
+                int ay = y + dy;
+                if (checkborder(ax, ay)) {
+                    for (char t : target) {
+                        if (terrain[ax][ay] == t) {
+                            return new Pos(ax, ay);
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
 }
+
+

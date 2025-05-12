@@ -1,9 +1,9 @@
 package Game;
 
-public class pos {
+public class Pos {
     public int x;
     public int y;
-    public pos(int x, int y) {
+    public Pos(int x, int y) {
         this.x = x;
         this.y = y;
     }

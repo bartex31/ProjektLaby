@@ -1,7 +1,7 @@
 package entities;
 
 import Game.Game;
-import Game.dir;
+import Game.Dir;
 
 public class grass extends entity {
     int growth = 0;
@@ -20,7 +20,7 @@ public class grass extends entity {
         if(random == 1) this.growth++;
         if(this.growth == 52){
             growth = 0;
-            for (dir dr: dir.values()) {
+            for (Dir dr: Dir.values()) {
                 int ax = x+ dr.ax;
                 int ay = y+ dr.ay;
                 var terrain = game.getTerrain();

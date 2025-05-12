@@ -1,11 +1,12 @@
 package entities;
 
-import Game.pos;
+import Game.Pos;
 
 public class animal extends entity{
     public int health;
     public int food;
     boolean isHunting = false;
+    char type;
 
 
     public void populate(char type) {
@@ -24,11 +25,11 @@ public class animal extends entity{
         }
     }
 
-    public pos randpos(){
-        return new pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
+    public Pos randpos(){
+        return new Pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
     }
 
-    public pos findnearest(char[] target){
+    public Pos findnearest(char[] target){
         char[][] terrain = game.getTerrain();
         for (int range = 1; range <= Math.max(terrain.length, terrain[0].length); range++) {
             for (int dx = -range; dx <= range; dx++) {
@@ -41,7 +42,7 @@ public class animal extends entity{
                         if (game.checkborder(ax, ay)) {
                             for(char t : target) {
                                 if (terrain[ax][ay] == t) {
-                                    return new pos(ax, ay);
+                                    return new Pos(ax, ay);
                                 }
                             }
                         }
@@ -52,15 +53,41 @@ public class animal extends entity{
         return null;
     }
     public void hunt(char[] target) {
+        Pos pos = game.check(x,y, target);
+        if(pos != null){
+            game.setMapentity(pos.x, pos.y, ' ');
+            this.isHunting = false;
+            this.food += 60;
+            return;
+        }
+        pos = findnearest(target);
+        int ax = 0, ay =0;
 
-        pos pos = findnearest(target);
-        int ax, ay;
         if (pos == null) {
             return;
         }
+        if ( x  == pos.x) {
+            if (y  -pos.y > 0) {
+                ay = -1;
+            }else ay =1;
+        }else if( y == pos.y ) {
+            if (x  -pos.x > 0) {
+                ax = -1;
+            }else ax = 1;
+        }else {
+            if (x > pos.x){
+                ax = -1;
+            }else {
+                ax = 1;
+            }
+            if (y > pos.y){
+                ay = -1;
+            } else {
+                ay = 1;
+            }
 
-
-      //  move();
+        }
+        move(ax,ay,type);
     }
 
 

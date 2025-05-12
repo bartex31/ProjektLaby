@@ -1,7 +1,7 @@
 package entities;
 
 import Game.Game;
-import Game.pos;
+import Game.Pos;
 
 public class sheep extends animal{
     char[] targets = {'g'};
@@ -11,6 +11,7 @@ public class sheep extends animal{
         this.health = 100;
         this.food = 100;
         this.name = "Sheep";
+        this.type = 's';
         this.game = game;
         this.game.setMapentity(x,y,'s');
     }
@@ -35,7 +36,7 @@ public class sheep extends animal{
         int rand  = (int) (Math.random() * 5);
         //gdy nie jest głodny randomi sie porusza
         if (rand == 0){
-            pos pos = randpos();
+            Pos pos = randpos();
             move(pos.x,pos.y, 's');
         }
     }
