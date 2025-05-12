@@ -13,6 +13,16 @@ public class Game {
 
     ArrayList<entity> entities = new ArrayList<entity>();
 
+    public int eatenSheep = 0;
+    public int eatenWolves = 0;
+    public int eatenHumans = 0;
+    public int eatenGrass = 0;
+
+    public int spawnedSheep = 0;
+    public int spawnedWolves = 0;
+    public int spawnedHumans = 0;
+    public int spawnedGrass = 0;
+
 
     public static void main(String[] args) {
         Game g = new Game();
