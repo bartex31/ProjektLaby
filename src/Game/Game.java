@@ -58,6 +58,18 @@ public class Game {
             if (input == 1) writeMap();
             if (day > 10) loop = false;
             day++;
+
+            System.out.println("=== Statystyki symulacji ===");
+            System.out.println("Stworzono: ");
+            System.out.println(" - Trawy: " + spawnedGrass);
+            System.out.println(" - Owce: " + spawnedSheep);
+            System.out.println(" - Wilki: " + spawnedWolves);
+            System.out.println(" - Ludzie: " + spawnedHumans);
+            System.out.println("Zjedzono: ");
+            System.out.println(" - Trawy: " + eatenGrass);
+            System.out.println(" - Owce: " + eatenSheep);
+            System.out.println(" - Wilki: " + eatenWolves);
+            System.out.println(" - Ludzie: " + eatenHumans);
         }
 
     }
