@@ -6,7 +6,7 @@ public class animal extends entity{
     public int health;
     public int food;
     boolean isHunting = false;
-
+    char[] targets;
 
 
     public void populate(char type) {
@@ -42,11 +42,12 @@ public class animal extends entity{
             for (entity e: game.getEntities()) {
                 if (e != this && pos.x == e.x && pos.y == e.y) {
                    e.die();
+                   this.food += 60;
                    break;
                 }
             }
 
-            this.food += 60;
+
             return;
         }
         pos = check(target,Math.max(game.getTerrain()[0].length, game.getTerrain().length));
@@ -79,30 +80,54 @@ public class animal extends entity{
         move(ax,ay,type);
     }
     public Pos check(char[] target, int range) {
-for(int r=0;r<range ; r++){
-        for (int dx = -1-r; dx <= 1+r; dx++) {
-            int ax = x + dx;
-            for (int dy = -1-r; dy <= 1+r; dy++) {
-                int ay = y + dy;
-if(math.abs(dx)<r||Math.abs(dy) <r) continue;
-                if (game.checkborder(ax, ay)) {
-                    for (char t : target) {
-                        if (game.getEntityMap()[ax][ay] == t || game.getTerrain()[ax][ay] == t) {
-                            return new Pos(ax, ay);
-                        }
+        for(int r=0;r<range ; r++){
+            for (int dx = -1-r; dx <= 1+r; dx++) {
+                int ax = x + dx;
+                    for (int dy = -1-r; dy <= 1+r; dy++) {
+                        int ay = y + dy;
+                            if(Math.abs(dx)<r||Math.abs(dy) <r) continue;
+                            if (game.checkborder(ax, ay)) {
+                                for (char t : target) {
+                                    if (game.getEntityMap()[ax][ay] == t || game.getTerrain()[ax][ay] == t) {
+                                        return new Pos(ax, ay);
+                                    }
+                                }
+                            }
                     }
-                }
             }
         }
-}
-        return null; 
-
+        return null;
     }
 
 
     @Override
     public void update() {
+        if(!game.getEntities().contains(this)) return;
+        if (health <= 0) {
+            System.out.println("umarł prze glod" + this.name + " " + this.x + " " + this.y);
+            this.die();
+            return;
+        }
+        if (food >0) {
+            food = food -10;
+        }
+        if (food < 60){
+            isHunting = true;
+        }
+        if (food < 0) health = health - 10;
 
+        if (isHunting) {
+            hunt(this.targets);
+            return;
+            //wyszukiwanie owcy i ruch w jego strone i return
+        }
+
+        int rand  = (int) (Math.random() * 5);
+        //gdy nie jest głodny randomi sie porusza
+        if (rand == 0){
+            Pos pos = randpos();
+            move(pos.x,pos.y, 's');
+        }
     }
 }
 

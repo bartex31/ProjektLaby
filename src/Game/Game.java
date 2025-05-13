@@ -62,14 +62,14 @@ public class Game {
             //int input = Integer.parseInt(sc.nextLine());
             //if (input == 1)=
             day++;
-            if (day > 30) loop = false;
+            if (day > 90) loop = false;
         }
 
     }
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
-                if (Math.random()<0.2) {
+                if (Math.random()<0.1) {
                     spawnEntity(x,y,'g');
                 }else terrain[x][y] = ' ';
                 entityMap[x][y] = ' ';
