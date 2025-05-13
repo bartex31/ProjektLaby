@@ -55,7 +55,7 @@ public class animal extends entity{
     }
 
     public void hunt(char[] target) {
-        Pos pos = check(target);
+        Pos pos = check(target,1);
 
         if(pos != null){
             System.out.println(" znaleziono ofiare "+ pos.x + " " + pos.y);
@@ -71,7 +71,7 @@ public class animal extends entity{
             this.food += 60;
             return;
         }
-        pos = findnearest(target);
+        pos = check(target,Math.max(game.getterrain[0].length, game.getterrain.length);
         int ax = 0, ay =0;
         if (pos == null) {
             return;
