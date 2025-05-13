@@ -17,11 +17,11 @@ public class animal extends entity{
 
         if (game.checkborder(x +ax,y+ay) && game.getEntityMap()[x +ax][y+ay] == ' ') {
             //System.out.printf("move z (%d,%d) na (%d,%d)\n",x,y,x + ax, y + ay);
-            //game.setMapentity(x, y, ' ');
+            game.setMapentity(x, y, ' ');
 
             this.x += ax;
             this.y += ay;
-           // game.setMapentity(x , y , type);
+            game.setMapentity(x , y , type);
         }
     }
 
