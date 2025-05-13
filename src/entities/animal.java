@@ -97,7 +97,7 @@ public class animal extends entity{
                 ay = 1;
             }
         }
-        System.out.println("szukanie " +ax +" " +ay+ " "+ type);
+        System.out.println("ruch w kiuerunku ofiary " +ax +" " +ay+ " "+ type + " " + pos.x + " " + pos.y);
         move(ax,ay,type);
     }
     public Pos check(char[] target) {
