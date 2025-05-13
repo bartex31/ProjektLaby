@@ -100,11 +100,13 @@ public class animal extends entity{
         System.out.println("ruch w kiuerunku ofiary " +ax +" " +ay+ " "+ type + " " + pos.x + " " + pos.y);
         move(ax,ay,type);
     }
-    public Pos check(char[] target) {
-        for (int dx = -1; dx <= 1; dx++) {
+    public Pos check(char[] target, int range) {
+for(int r=0;r<range ; r++){
+        for (int dx = -1-r; dx <= 1+r; dx++) {
             int ax = x + dx;
-            for (int dy = -1; dy <= 1; dy++) {
+            for (int dy = -1-r; dy <= 1+r; dy++) {
                 int ay = y + dy;
+if(math.abs(dx)<r||Math.abs(dy) <r) continue;
                 if (game.checkborder(ax, ay)) {
                     for (char t : target) {
                         if (game.getEntityMap()[ax][ay] == t || game.getTerrain()[ax][ay] == t) {
@@ -114,7 +116,9 @@ public class animal extends entity{
                 }
             }
         }
-        return null;
+}
+        return null; 
+
     }
 
 
