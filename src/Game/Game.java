@@ -64,7 +64,9 @@ public class Game {
             day++;
             if (day > 40) loop = false;
         }
-
+        System.out.println("umarło " + sheepskilled + " owc ");
+        System.out.println("umarło " + humankilled + " ludzi ");
+        System.out.println("umarło " + wolfskilled + " wilków ");
     }
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
         for (int x = 0; x < sizeMapx; x++) {
@@ -177,6 +179,7 @@ public class Game {
         if (et instanceof animal) {
             entityMap[et.getX()][et.getY()] = ' ';
         }
+
         entities.remove(et);
     }
 
