@@ -50,7 +50,7 @@ public class Game {
         day++;
         while (loop) {
             System.out.println("dzień = " + day);
-
+            refreshWorld();
             List<entity> copy = new ArrayList<>(entities);
             for (entity e : copy) {
                 e.update();
@@ -106,7 +106,7 @@ public class Game {
         }
         for(entity e : entities) {
             if (e instanceof animal) entityMap[e.getX()][e.getY()] = e.type;
-            if(e instanceof  grass) terrain[e.getX()][e.getY()] = e.type;
+            if(e instanceof  grass) terrain[e.getX()][e.getY()] = '■';
         }
 
     }
