@@ -30,29 +30,7 @@ public class animal extends entity{
     }
 
 
-    public Pos findnearest(char[] target){
-        char[][] terrain = game.getTerrain();
-        for (int range = 1; range <= Math.max(terrain.length, terrain[0].length); range++) {
-            for (int dx = -range; dx <= range; dx++) {
-                int ax = x + dx;
-                for (int dy = -range; dy <= range; dy++) {
-
-                    int ay = y + dy;
-
-                    if (Math.abs(dx) == range || Math.abs(dy) == range) {
-                        if (game.checkborder(ax, ay)) {
-                            for(char t : target) {
-                                if (game.getEntityMap()[ax][ay] == t || terrain[ax][ay] == t) {
-                                    return new Pos(ax, ay);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return null;
-    }
+    
 
     public void hunt(char[] target) {
         Pos pos = check(target,1);
@@ -71,7 +49,7 @@ public class animal extends entity{
             this.food += 60;
             return;
         }
-        pos = check(target,Math.max(game.getTerrain[0].length, game.getTerrain.length);
+        pos = check(target,Math.max(game.getTerrain()[0].length, game.getTerrain().length));
         int ax = 0, ay =0;
         if (pos == null) {
             return;
