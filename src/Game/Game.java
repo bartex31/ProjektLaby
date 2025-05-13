@@ -35,14 +35,9 @@ public class Game {
         g.sizeMapy = height;
         g.terrain = new char[width][height];
         g.entityMap = new char[width][height];
-        g.worldGen();
-        System.out.println();
-        g.entityGen(sheepCount, 's');
-        System.out.println();
-        g.entityGen(wolfCount, 'w');
-        System.out.println();
-        g.entityGen(humanCount, 'h');
-        System.out.println();
+
+
+        g.initStart(sheepCount,wolfCount,humanCount);
         g.gameLopp();
     }
 
@@ -50,34 +45,42 @@ public class Game {
         boolean loop = true;
         int day = 0;
         Scanner sc = new Scanner(System.in);
+        System.out.println("dzień = " + day);
+        writeMap();
+        day++;
         while (loop) {
 
             System.out.println("dzień = " + day);
+
             List<entity> copy = new ArrayList<>(entities);
             for (entity e : copy) {
                 e.update();
             }
+            refreshWorld();
+            writeMap();
 
-            int input = Integer.parseInt(sc.nextLine());
-            if (input == 1) writeMap();
-            if (day > 10) loop = false;
+            //int input = Integer.parseInt(sc.nextLine());
+            //if (input == 1)
+            if (day > 30) loop = false;
             day++;
         }
 
     }
+    private void initStart(int sheepCount, int wolfCount, int humanCount) {
 
-    private void worldGen() {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
-                int rand = (int) (Math.random() * 14);
-                this.terrain[x][y] = ' ';
-                this.entityMap[x][y] = ' ';
-                if (rand == 0) {
-                    //spawnEntity(x,y,'g');
-                }
+                if (Math.random()<0.2) {
+                    spawnEntity(x,y,'g');
+                }else terrain[x][y] = ' ';
+                entityMap[x][y] = ' ';
             }
         }
+        entityGen(sheepCount, 's');
+        entityGen(wolfCount, 'w');
+        entityGen(humanCount, 'h');
     }
+
 
     private void entityGen(int count , char type) {
         int counted =0;
@@ -96,7 +99,16 @@ public class Game {
 
 
 
-
+    private void refreshWorld() {
+        for (int x = 0; x < sizeMapx; x++) {
+            for (int y = 0; y < sizeMapy; y++) {
+                entityMap[x][y] = ' ';
+            }
+        }
+        for(entity e : entities) {
+            if (e instanceof animal) entityMap[e.getX()][e.getY()] = e.type;
+        }
+    }
     private void writeMap() {
         System.out.print("   |");
         for (int test =0 ; test < sizeMapx ; test++) {
@@ -167,6 +179,7 @@ public class Game {
     }
 
 
+
     public char[][] getEntityMap() {
         return entityMap;
     }
@@ -176,35 +189,16 @@ public class Game {
         this.entityMap[ax][ay] = type;
     }
 
-
-
     public ArrayList<entity> getEntities() {
         return entities;
     }
     public char[][] getTerrain() {
         return terrain;
     }
-    public void changeTerrain(int x, int y, char z) {
+    public void setTerrain(int x, int y, char z) {
         terrain[x][y] = z;
     }
-    public Pos check(int x , int y , char[] target) {
-        for (int dx = -1; dx <= 1; dx++) {
-            int ax = x + dx;
-            for (int dy = -1; dy <= 1; dy++) {
-                int ay = y + dy;
 
-                if (checkborder(ax, ay)) {
-                    for (char t : target) {
-                        if (entityMap[ax][ay] == t || terrain[ax][ay] == t) {
-                            return new Pos(ax, ay);
-                        }
-
-                    }
-                }
-            }
-        }
-        return null;
-    }
 
 }
 

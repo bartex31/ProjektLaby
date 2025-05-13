@@ -7,6 +7,7 @@ public abstract class entity {
     protected int x;
     protected int y;
     protected Game game;
+    public char type;
 
 
     abstract public void update();
@@ -18,6 +19,7 @@ public abstract class entity {
         return y;
     }
     public void die(){
+        System.out.println("umarł " + this.name + " " + this.x + " " + this.y);
         game.despawnEntity(this);
     }
 }

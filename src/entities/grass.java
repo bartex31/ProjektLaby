@@ -11,14 +11,16 @@ public class grass extends entity {
         this.x = x;
         this.y = y;
         this.game = game;
-        this.game.changeTerrain(x,y,'g');
+        this.game.setTerrain(x,y,'g');
+        this.type = 'g';
     }
 
     @Override
     public void update() {
-        int random = (int)(Math.random()*3);
+        if(!game.getEntities().contains(this)) return;
+        int random = (int)(Math.random()*2);
         if(random == 1) this.growth++;
-        if(this.growth == 52){
+        if(this.growth == 2){
             growth = 0;
             for (Dir dr: Dir.values()) {
                 int ax = x+ dr.ax;

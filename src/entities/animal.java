@@ -6,7 +6,7 @@ public class animal extends entity{
     public int health;
     public int food;
     boolean isHunting = false;
-    char type;
+
 
 
     public void populate(char type) {
@@ -28,6 +28,7 @@ public class animal extends entity{
     public Pos randpos(){
         return new Pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
     }
+
 
     public Pos findnearest(char[] target){
         char[][] terrain = game.getTerrain();
@@ -54,14 +55,14 @@ public class animal extends entity{
     }
 
     public void hunt(char[] target) {
-        Pos pos = game.check(x,y, target);
+        Pos pos = check(target);
 
         if(pos != null){
             System.out.println(" znaleziono ofiare "+ pos.x + " " + pos.y);
             //game.setMapentity(pos.x, pos.y, ' ');
             this.isHunting = false;
             for (entity e: game.getEntities()) {
-                if (pos.x == e.x && pos.y == e.y) {
+                if (e != this && pos.x == e.x && pos.y == e.y) {
                    e.die();
                    break;
                 }
@@ -72,11 +73,10 @@ public class animal extends entity{
         }
         pos = findnearest(target);
         int ax = 0, ay =0;
-
         if (pos == null) {
-
             return;
         }
+
         if ( x  == pos.x) {
             if (y  -pos.y > 0) {
                 ay = -1;
@@ -96,10 +96,25 @@ public class animal extends entity{
             } else {
                 ay = 1;
             }
-
         }
         System.out.println("szukanie " +ax +" " +ay+ " "+ type);
         move(ax,ay,type);
+    }
+    public Pos check(char[] target) {
+        for (int dx = -1; dx <= 1; dx++) {
+            int ax = x + dx;
+            for (int dy = -1; dy <= 1; dy++) {
+                int ay = y + dy;
+                if (game.checkborder(ax, ay)) {
+                    for (char t : target) {
+                        if (game.getEntityMap()[ax][ay] == t || game.getTerrain()[ax][ay] == t) {
+                            return new Pos(ax, ay);
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
 

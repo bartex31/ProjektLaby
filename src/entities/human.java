@@ -17,12 +17,13 @@ public class human extends animal {
 
     @Override
     public void update() {
+        if(!game.getEntities().contains(this)) return;
         if (food >0) {
             food = food -10;
         }
         if (food < 90){
             isHunting = true;
-            health = health - 20;
+            health = health - 10;
         }
         if (health <= 0) {
             this.die();

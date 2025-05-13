@@ -17,12 +17,13 @@ public class wolf extends animal {
 
     @Override
     public void update() {
+        if(!game.getEntities().contains(this)) return;
 
         if (food >0) {
             food = food -10;
         }
         if (food < 90){
-            System.out.println("poczatek polowania " + type);
+            //System.out.println("poczatek polowania " + type);
             isHunting = true;
             health = health - 10;
         }
