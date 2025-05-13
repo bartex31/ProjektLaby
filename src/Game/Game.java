@@ -49,25 +49,24 @@ public class Game {
         writeMap();
         day++;
         while (loop) {
-
             System.out.println("dzień = " + day);
 
             List<entity> copy = new ArrayList<>(entities);
             for (entity e : copy) {
                 e.update();
             }
+
             refreshWorld();
             writeMap();
 
             //int input = Integer.parseInt(sc.nextLine());
-            //if (input == 1)
-            if (day > 30) loop = false;
+            //if (input == 1)=
             day++;
+            if (day > 30) loop = false;
         }
 
     }
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
-
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
                 if (Math.random()<0.2) {
@@ -80,8 +79,6 @@ public class Game {
         entityGen(wolfCount, 'w');
         entityGen(humanCount, 'h');
     }
-
-
     private void entityGen(int count , char type) {
         int counted =0;
         int randx, randy;
@@ -90,6 +87,7 @@ public class Game {
             randx = (int) (Math.random() * sizeMapx);
             randy = (int) (Math.random() * sizeMapy);
             //System.out.println("spawn" + randx +" " + randy + " " + type);
+
             if(spawnEntity(randx, randy, type)) counted++;
         }
     }
@@ -103,11 +101,14 @@ public class Game {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
                 entityMap[x][y] = ' ';
+                terrain[x][y] = ' ';
             }
         }
         for(entity e : entities) {
             if (e instanceof animal) entityMap[e.getX()][e.getY()] = e.type;
+            if(e instanceof  grass) terrain[e.getX()][e.getY()] = e.type;
         }
+
     }
     private void writeMap() {
         System.out.print("   |");
@@ -171,6 +172,7 @@ public class Game {
     public void despawnEntity(entity et) {
         if (et instanceof grass) {
             terrain[et.getX()][et.getY()] = ' ';
+
         }
         if (et instanceof animal) {
             entityMap[et.getX()][et.getY()] = ' ';
