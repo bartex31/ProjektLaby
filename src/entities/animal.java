@@ -71,7 +71,7 @@ public class animal extends entity{
             this.food += 60;
             return;
         }
-        pos = check(target,Math.max(game.getterrain[0].length, game.getterrain.length);
+        pos = check(target,Math.max(game.getTerrain[0].length, game.getTerrain.length);
         int ax = 0, ay =0;
         if (pos == null) {
             return;
