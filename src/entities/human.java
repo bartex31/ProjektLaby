@@ -4,10 +4,11 @@ import Game.Game;
 import Game.Pos;
 public class human extends animal {
     public human(int x, int y, Game game) {
+        super();
         this.x = x;
         this.y = y;
         this.health = 100;
-        this.food = 100;
+        this.food = 50;
         this.type = 'h';
         this.name = "human";
         this.game = game;

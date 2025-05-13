@@ -62,7 +62,7 @@ public class Game {
             //int input = Integer.parseInt(sc.nextLine());
             //if (input == 1)=
             day++;
-            if (day > 90) loop = false;
+            if (day > 40) loop = false;
         }
 
     }

@@ -7,7 +7,7 @@ public class wolf extends animal {
         this.x = x;
         this.y = y;
         this.health = 100;
-        this.food = 100;
+        this.food = 50;
         this.name = "Wolf";
         this.type = 'w';
         this.game = game;

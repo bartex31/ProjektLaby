@@ -1,5 +1,6 @@
 package entities;
 
+import Game.Game;
 import Game.Pos;
 
 public class animal extends entity{
@@ -7,10 +8,16 @@ public class animal extends entity{
     public int food;
     boolean isHunting = false;
     char[] targets;
+    int prgoress = 0;
+
+
 
 
     public void populate(char type) {
-       game.spawnEntity(x,y,type); //do zmiany
+        Pos free = check(new char[]{' '}, 1);
+        if (free != null) {
+            game.spawnEntity(free.x,free.y,type); //do zmiany
+        }
     }
 
     public void move(int ax, int ay, char type) {
@@ -115,7 +122,13 @@ public class animal extends entity{
             isHunting = true;
         }
         if (food < 0) health = health - 10;
-
+        if (food >70) {
+            prgoress++;
+        }
+        if (prgoress == 3){
+            populate(type);
+            food -= 40;
+        }
         if (isHunting) {
             hunt(this.targets);
             return;
@@ -126,7 +139,7 @@ public class animal extends entity{
         //gdy nie jest głodny randomi sie porusza
         if (rand == 0){
             Pos pos = randpos();
-            move(pos.x,pos.y, 's');
+            move(pos.x,pos.y, type);
         }
     }
 }
