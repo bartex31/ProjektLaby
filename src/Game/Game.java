@@ -48,7 +48,6 @@ public class Game {
         System.out.println("dzień = " + day);
         writeMap();
         day++;
-
         while (loop) {
             System.out.println("dzień = " + day);
             refreshWorld();
@@ -62,16 +61,9 @@ public class Game {
 
             //int input = Integer.parseInt(sc.nextLine());
             //if (input == 1)=
-
             day++;
             if (day > 40) loop = false;
-
         }
-        writeMap();
-        System.out.println("zmarło " + sheepskilled + " owc");
-        System.out.println("zmarło " + humankilled + " ludzi");
-        System.out.println("zmarło " + wolfskilled + " wilków");
-        System.out.println("zjedzono " + grasseaten + " trawy");
 
     }
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
