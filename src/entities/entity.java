@@ -20,6 +20,10 @@ public abstract class entity {
     }
     public void die(){
         System.out.println("umarł " + this.name + " " + this.x + " " + this.y);
+        if(this instanceof wolf) game.wolfskilled++;
+        if (this instanceof sheep) game.sheepskilled++;
+        if (this instanceof human) game.humankilled++;
+        if(this instanceof  grass) game.grasseaten++;
         game.despawnEntity(this);
     }
 }

@@ -1,6 +1,5 @@
 package entities;
 import Game.Game;
-import Game.Pos;
 
 public class wolf extends animal {
     public wolf(int x, int y, Game game) {
@@ -12,7 +11,7 @@ public class wolf extends animal {
         this.type = 'w';
         this.game = game;
         this.game.setMapentity(x,y,'w');
-        this.targets = new char[]{'s','h'};
+        this.allowedTargets = new char[]{'s','h'};
     }
 
 }

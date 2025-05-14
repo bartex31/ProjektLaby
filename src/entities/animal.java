@@ -1,13 +1,17 @@
 package entities;
 
-import Game.Game;
 import Game.Pos;
+
+import java.util.ArrayList;
 
 public class animal extends entity{
     public int health;
     public int food;
     boolean isHunting = false;
-    char[] targets;
+    char[] allowedTargets;
+
+    entity target;
+
     int prgoress = 0;
 
 
@@ -32,24 +36,26 @@ public class animal extends entity{
         }
     }
 
-    public Pos randpos(){
-        return new Pos((int)(Math.random()*3)-1, (int)(Math.random()*3)-1);
+    public Pos randpos(int range){
+        return new Pos((int)(Math.random()*(range+3))-range, (int)(Math.random()*(range+3))-range);
     }
 
 
     
 
-    public void hunt(char[] target) {
-        Pos pos = check(target,1);
+    public void hunt(char[] allowedTarget) {
+        Pos pos = check(allowedTarget,1);
 
         if(pos != null){
-            System.out.println(" znaleziono ofiare "+ pos.x + " " + pos.y);
+            //System.out.println(" znaleziono ofiare "+ pos.x + " " + pos.y);
             //game.setMapentity(pos.x, pos.y, ' ');
             this.isHunting = false;
-            for (entity e: game.getEntities()) {
+            ArrayList<entity> entities = game.getEntities();
+            for (entity e: entities) {
                 if (e != this && pos.x == e.x && pos.y == e.y) {
                    e.die();
                    this.food += 60;
+                   target = null;
                    break;
                 }
             }
@@ -57,33 +63,45 @@ public class animal extends entity{
 
             return;
         }
-        pos = check(target,Math.max(game.getTerrain()[0].length, game.getTerrain().length));
-        int ax = 0, ay =0;
-        if (pos == null) {
-            return;
+        if(target == null ){
+            pos = check(allowedTarget,Math.max(game.getTerrain()[0].length, game.getTerrain().length));
+            if (pos == null) {
+                return;
+            }
+            for (entity e: game.getEntities()) {
+                if (e != this && pos.x == e.x && pos.y == e.y) {
+                    target = e;
+                    break;
+                }
+            }
         }
 
-        if ( x  == pos.x) {
-            if (y  -pos.y > 0) {
+
+
+        int ax = 0, ay =0;
+
+
+        if ( x  == target.x) {
+            if (y  -target.y > 0) {
                 ay = -1;
             }else ay =1;
-        }else if( y == pos.y ) {
-            if (x  -pos.x > 0) {
+        }else if( y == target.y ) {
+            if (x  -target.x > 0) {
                 ax = -1;
             }else ax = 1;
         }else {
-            if (x > pos.x){
+            if (x > target.x){
                 ax = -1;
             }else {
                 ax = 1;
             }
-            if (y > pos.y){
+            if (y > target.y){
                 ay = -1;
             } else {
                 ay = 1;
             }
         }
-        System.out.println("ruch w kiuerunku ofiary " +ax +" " +ay+ " "+ type + " " + pos.x + " " + pos.y);
+        //System.out.println("ruch w kiuerunku ofiary " +ax +" " +ay+ " "+ type + " " + target.x + " " + target.y);
         move(ax,ay,type);
     }
     public Pos check(char[] target, int range) {
@@ -130,7 +148,7 @@ public class animal extends entity{
             food -= 40;
         }
         if (isHunting) {
-            hunt(this.targets);
+            hunt(this.allowedTargets);
             return;
             //wyszukiwanie owcy i ruch w jego strone i return
         }
@@ -138,7 +156,7 @@ public class animal extends entity{
         int rand  = (int) (Math.random() * 5);
         //gdy nie jest głodny randomi sie porusza
         if (rand == 0){
-            Pos pos = randpos();
+            Pos pos = randpos(3);
             move(pos.x,pos.y, type);
         }
     }
