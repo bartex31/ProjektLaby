@@ -41,6 +41,28 @@ public class Game {
         g.gameLopp();
     }
 
+    //    public void SaveCsv(int day) {
+//        try {
+//            FileWriter writer = new FileWriter("symulacjaZapis.csv", true);
+//
+//            if (day == 1) {
+//                writer.write("Dzien;Zjedzona trawa;Zjedzone owce;Zjedzone wilki;Zjedzeni ludzie\n");
+//            }
+//
+//            writer.write(
+//                    day + ";" +
+//                            grasseaten + ";" +
+//                            sheepskilled + ";" +
+//                            wolfskilled + ";" +
+//                            humankilled + "\n"
+//            );
+//
+//            writer.close();
+//        } catch (IOException e) {
+//            System.out.println("Błąd przy zapisie: " + e.getMessage());
+//        }
+//    }
+
     public void gameLopp() {
         boolean loop = true;
         int day = 0;
@@ -63,6 +85,8 @@ public class Game {
             //if (input == 1)=
             day++;
             if (day > 40) loop = false;
+
+    //            SaveCsv(day);
         }
 
     }
