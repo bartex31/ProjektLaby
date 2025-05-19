@@ -145,8 +145,6 @@ public class Game {
         return ax >= 0 && ax < sizeMapx && ay >= 0 && ay < sizeMapy;
     }
 
-
-
     public boolean spawnEntity(int x, int y, char type) {
         if(type != 'g' && entityMap[x][y] != ' ') return false;
         switch (type) {
