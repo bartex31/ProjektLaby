@@ -1,8 +1,9 @@
 package entities;
 
 import Game.Game;
-import Game.Pos;
+
 public class human extends animal {
+    static public int ammount = 0;
     public human(int x, int y, Game game) {
         super();
         this.x = x;
@@ -12,8 +13,12 @@ public class human extends animal {
         this.type = 'h';
         this.name = "human";
         this.game = game;
+        ammount +=1 ;
         this.game.setMapentity(x,y,'h');
         this.targets = new char[]{'s','w'};
+    }
+    public void addammount(){
+        ammount+=1;
     }
 
 

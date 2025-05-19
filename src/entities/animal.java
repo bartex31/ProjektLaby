@@ -13,12 +13,15 @@ public class animal extends entity{
 
 
 
+
+
     public void populate(char type) {
         Pos free = check(new char[]{' '}, 1);
         if (free != null) {
             game.spawnEntity(free.x,free.y,type); //do zmiany
         }
     }
+
 
     public void move(int ax, int ay, char type) {
 

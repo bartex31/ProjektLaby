@@ -23,6 +23,7 @@ public abstract class entity {
         if (this instanceof sheep) game.sheepskilled += 1;
         if (this instanceof wolf) game.wolfskilled += 1;
         if (this instanceof human) game.humankilled +=1;
+
         game.despawnEntity(this);
 
     }

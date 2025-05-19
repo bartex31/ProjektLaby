@@ -16,6 +16,7 @@ public class Game {
     public int humankilled =0;
 
     ArrayList<entity> entities = new ArrayList<entity>();
+    ArrayList<Save> saves = new ArrayList<Save>();
 
 
     public static void main(String[] args) {
@@ -72,6 +73,7 @@ public class Game {
         day++;
         while (loop) {
             System.out.println("dzień = " + day);
+            saves.add(new Save(day,1,1,1,1,wolfskilled,sheepskilled,humankilled));
             refreshWorld();
             List<entity> copy = new ArrayList<>(entities);
             for (entity e : copy) {
@@ -203,8 +205,8 @@ public class Game {
         if (et instanceof animal) {
             entityMap[et.getX()][et.getY()] = ' ';
         }
-
         entities.remove(et);
+
     }
 
 

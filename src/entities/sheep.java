@@ -4,6 +4,7 @@ import Game.Game;
 import Game.Pos;
 
 public class sheep extends animal{
+    static public int ammount = 0;
 
     public sheep(int x, int y, Game game) {
         this.x = x;
@@ -13,6 +14,7 @@ public class sheep extends animal{
         this.name = "Sheep";
         this.type = 's';
         this.game = game;
+        ammount +=1 ;
         this.game.setMapentity(x,y,'s');
         this.targets = new char[]{'g'};
     }
