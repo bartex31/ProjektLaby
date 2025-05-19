@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import entities.*;
+import Game.*;
 
 public class Game {
     int sizeMapx, sizeMapy;
@@ -42,27 +43,7 @@ public class Game {
         g.gameLopp();
     }
 
-    //    public void SaveCsv(int day) {
-//        try {
-//            FileWriter writer = new FileWriter("symulacjaZapis.csv", true);
-//
-//            if (day == 1) {
-//                writer.write("Dzien;Zjedzona trawa;Zjedzone owce;Zjedzone wilki;Zjedzeni ludzie\n");
-//            }
-//
-//            writer.write(
-//                    day + ";" +
-//                            grasseaten + ";" +
-//                            sheepskilled + ";" +
-//                            wolfskilled + ";" +
-//                            humankilled + "\n"
-//            );
-//
-//            writer.close();
-//        } catch (IOException e) {
-//            System.out.println("Błąd przy zapisie: " + e.getMessage());
-//        }
-//    }
+
 
     public void gameLopp() {
         boolean loop = true;
@@ -73,23 +54,22 @@ public class Game {
         day++;
         while (loop) {
             System.out.println("dzień = " + day);
-            saves.add(new Save(day,1,1,1,1,wolfskilled,sheepskilled,humankilled));
+            saves.add(new Save(day,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
             refreshWorld();
             List<entity> copy = new ArrayList<>(entities);
-            for (entity e : copy) {
-                e.update();
-            }
+            for (entity e : copy) e.update();
 
             refreshWorld();
             writeMap();
+
 
             //int input = Integer.parseInt(sc.nextLine());
             //if (input == 1)=
             day++;
             if (day > 40) loop = false;
 
-    //            SaveCsv(day);
         }
+        Save.saveCsv(saves);
         System.out.println("umarło " + sheepskilled + " owc ");
         System.out.println("umarło " + humankilled + " ludzi ");
         System.out.println("umarło " + wolfskilled + " wilków ");

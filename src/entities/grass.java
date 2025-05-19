@@ -15,7 +15,6 @@ public class grass extends entity {
         this.game.setTerrain(x,y,'g');
         this.type = 'g';
         ammount +=1 ;
-
     }
 
     @Override
