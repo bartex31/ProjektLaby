@@ -31,7 +31,7 @@ public class animal extends entity{
     public void move(int ax, int ay, char type) {
 
         if (game.checkborder(x +ax,y+ay) && game.getEntityMap()[x +ax][y+ay] == ' ') {
-            //System.out.printf("move z (%d,%d) na (%d,%d)\n",x,y,x + ax, y + ay);
+            System.out.printf("move z (%d,%d) na (%d,%d)\n",x,y,x + ax, y + ay);
             game.setMapentity(x, y, ' ');
 
             this.x += ax;
@@ -41,7 +41,17 @@ public class animal extends entity{
     }
 
     public Pos randpos(){
-        return new Pos((int)(Math.random()*4)-1, (int)(Math.random()*4)-1);
+        Pos pos = new Pos((int)(Math.random()*4)-1, (int)(Math.random()*4)-1);
+        //System.out.println(pos.x+ " " + pos.y);
+        if (game.checkborder(x+ pos.x,y+ pos.y)) {
+            //System.out.println("przeszło " +pos.x+ " " + pos.y);
+            return pos;
+        }else{
+            randpos();
+        }
+
+
+        return new Pos(0,0);
     }
 
 
@@ -50,10 +60,15 @@ public class animal extends entity{
     public void hunt(char[] target) {
         Pos pos = check(target,1);
 
-        if(pos != null){
+        if(pos != null ){
             //System.out.println(" znaleziono ofiare "+ pos.x + " " + pos.y);
             //game.setMapentity(pos.x, pos.y, ' ');
             this.isHunting = false;
+            if(this instanceof sheep){
+                game.getTerrain()[pos.x][pos.y] = ' ';
+                this.food += 60;
+                return;
+            }
             for (entity e: game.getEntities()) {
                 if (e != this && pos.x == e.x && pos.y == e.y) {
                    e.die();
@@ -73,28 +88,30 @@ public class animal extends entity{
 
         if ( x  == pos.x) {
             if (y  -pos.y > 0) {
-                ay = -1;
-            }else ay =1;
+                ay = -2;
+            }else ay =2;
         }else if( y == pos.y ) {
             if (x  -pos.x > 0) {
-                ax = -1;
-            }else ax = 1;
+                ax = -2;
+            }else ax = 2;
         }else {
             if (x > pos.x){
-                ax = -1;
+                ax = -2;
             }else {
-                ax = 1;
+                ax = 2;
             }
             if (y > pos.y){
-                ay = -1;
+                ay = -2;
             } else {
-                ay = 1;
+                ay = 2;
             }
         }
         //System.out.println("ruch w kiuerunku ofiary " +ax +" " +ay+ " "+ type + " " + pos.x + " " + pos.y);
         move(ax,ay,type);
     }
     public Pos check(char[] target, int range) {
+
+
         //System.out.println(range);
         for(int r=0;r<range ; r++){
             for (int dx = -1-r; dx <= 1+r; dx++) {
@@ -147,12 +164,9 @@ public class animal extends entity{
             //wyszukiwanie owcy i ruch w jego strone i return
         }
 
-        int rand  = (int) (Math.random() * 5);
-        //gdy nie jest głodny randomi sie porusza
-        if (rand == 0){
-            Pos pos = randpos();
-            move(pos.x,pos.y, type);
-        }
+        Pos pos = randpos();
+        move(pos.x,pos.y, type);
+
     }
 }
 
