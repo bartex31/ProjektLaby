@@ -31,7 +31,7 @@ public class animal extends entity{
     public void move(int ax, int ay, char type) {
 
         if (game.checkborder(x +ax,y+ay) && game.getEntityMap()[x +ax][y+ay] == ' ') {
-            System.out.printf("move z (%d,%d) na (%d,%d)\n",x,y,x + ax, y + ay);
+            System.out.printf(this.name + " porusza  z (%d,%d) na (%d,%d)\n",x,y,x + ax, y + ay);
             game.setMapentity(x, y, ' ');
 
             this.x += ax;
@@ -65,15 +65,17 @@ public class animal extends entity{
             //game.setMapentity(pos.x, pos.y, ' ');
             this.isHunting = false;
             if(this instanceof sheep){
+                System.out.println(this.name + " zjada trawe " + pos.x + " " + pos.y );
                 game.getTerrain()[pos.x][pos.y] = ' ';
                 this.food += 60;
                 return;
             }
             for (entity e: game.getEntities()) {
                 if (e != this && pos.x == e.x && pos.y == e.y) {
-                   e.die();
-                   this.food += 60;
-                   break;
+                    System.out.println(this.name + " zjada " + pos.x + " " + pos.y );
+                    e.die();
+                    this.food += 60;
+                    break;
                 }
             }
 
