@@ -1,8 +1,7 @@
 package Game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 import entities.*;
 import Game.*;
 
@@ -14,10 +13,9 @@ public class Game {
     public int wolfskilled = 0;
     public int grasseaten =0;
     public int humankilled =0;
-
+    private int day = 0;
     ArrayList<entity> entities = new ArrayList<entity>();
     ArrayList<Save> saves = new ArrayList<Save>();
-
 
     public static void main(String[] args) {
         Game g = new Game();
@@ -39,7 +37,6 @@ public class Game {
         g.terrain = new char[width][height];
         g.entityMap = new char[width][height];
 
-
         g.initStart(sheepCount,wolfCount,humanCount);
         g.gameLopp(days);
     }
@@ -49,7 +46,7 @@ public class Game {
     public void gameLopp(int days) {
         boolean loop = true;
         boolean ignorePreq = false;
-        int day = 0;
+
         Scanner sc = new Scanner(System.in);
         System.out.println("dzień = " + day);
         writeMap();
@@ -63,12 +60,9 @@ public class Game {
             growGrass();
             List<entity> copy = new ArrayList<>(entities);
             for (entity e : copy) e.update();
-
             saves.add(new Save(day,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
             refreshWorld();
             writeMap();
-
-            //
             day++;
             if ( wolf.ammount ==0 &&sheep.ammount ==0&& human.ammount== 0 && !ignorePreq ){
                 System.out.println("zwierzeta wymarły w " +day+ " czy kontnuowac symulacje: 0 - nie  1-tak");
@@ -196,10 +190,6 @@ public class Game {
         }
     }
     public void despawnEntity(entity et) {
-//        if (et instanceof grass) {
-//            terrain[et.getX()][et.getY()] = ' ';
-//        }
-
         if (et instanceof animal) {
             entityMap[et.getX()][et.getY()] = ' ';
         }
