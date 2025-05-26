@@ -4,6 +4,7 @@ import Game.Game;
 import Game.Pos;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class animal extends entity{
     public int health;
@@ -41,21 +42,15 @@ public class animal extends entity{
     }
 
     public Pos randpos(){
-        Pos pos = new Pos((int)(Math.random()*4)-1, (int)(Math.random()*4)-1);
-        //System.out.println(pos.x+ " " + pos.y);
-        if (game.checkborder(x+ pos.x,y+ pos.y)) {
-            //System.out.println("przeszło " +pos.x+ " " + pos.y);
-            return pos;
-        }else{
-            randpos();
+        Random random = new Random();
+        Pos pos = new Pos(0,0);
+        for (int i=0; i< 15;i++){
+            pos = new Pos((int)(Math.random()*4)-1, (int)(Math.random()*4)-1);
+            if (game.checkborder(x+ pos.x,y+ pos.y)) return pos;
         }
-
-
         return new Pos(0,0);
     }
 
-
-    
 
     public void hunt(char[] target) {
         Pos pos = check(target,1);

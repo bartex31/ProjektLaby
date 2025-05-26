@@ -17,9 +17,5 @@ public class human extends animal {
         this.game.setMapentity(x,y,'h');
         this.targets = new char[]{'s','w'};
     }
-    public void addammount(){
-        ammount+=1;
-    }
-
 
 }
