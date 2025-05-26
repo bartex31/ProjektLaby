@@ -42,8 +42,7 @@ public class animal extends entity{
     }
 
     public Pos randpos(){
-        Random random = new Random();
-        Pos pos = new Pos(0,0);
+        Pos pos;
         for (int i=0; i< 15;i++){
             pos = new Pos((int)(Math.random()*4)-1, (int)(Math.random()*4)-1);
             if (game.checkborder(x+ pos.x,y+ pos.y)) return pos;
@@ -61,6 +60,8 @@ public class animal extends entity{
             this.isHunting = false;
             if(this instanceof sheep){
                 System.out.println(this.name + " zjada trawe " + pos.x + " " + pos.y );
+                game.grasseaten++;
+                grass.ammount--;
                 game.getTerrain()[pos.x][pos.y] = ' ';
                 this.food += 60;
                 return;
@@ -137,7 +138,7 @@ public class animal extends entity{
         if(!game.getEntities().contains(this)) return;
         //System.out.println(this.name + " " +health + " " + food);
         if (health <= 0) {
-            System.out.println("umarł prze glod" + this.name + " " + this.x + " " + this.y);
+            System.out.println("umarł prze glod " + this.name + " " + this.x + " " + this.y);
             this.die();
             return;
         }

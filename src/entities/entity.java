@@ -22,10 +22,10 @@ public abstract class entity {
 
     public void die(){
         System.out.println("umarł " + this.name + " " + this.x + " " + this.y);
-        if (this instanceof grass){
-            game.grasseaten +=1;
-            grass.ammount --;
-        }
+//        if (this instanceof grass){
+//            game.grasseaten +=1;
+//            grass.ammount --;
+//        }
         if (this instanceof sheep) {
             game.sheepskilled += 1;
             sheep.ammount --;

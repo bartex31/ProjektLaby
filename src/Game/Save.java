@@ -2,6 +2,9 @@ package Game;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Save {
@@ -28,10 +31,11 @@ public class Save {
     }
 
     public static void saveCsv(ArrayList<Save> saves) {
-        try(FileWriter writer = new FileWriter("symulacjaZapis.csv", true);) {
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss"));
+        try(FileWriter writer = new FileWriter(date+ ".csv", true);) {
 
 
-            if (saves.get(0).day == 1) {
+            if (saves.getFirst().day == 0) {
                 writer.write("Dzien;Wilki;Owce;Ludzie;Trawa;Zjedzone wilki;Zjedzone owce;Zjedzeni ludzie;Zjedzona trawa\n");
             }
             for (Save s : saves) {
