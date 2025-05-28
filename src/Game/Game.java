@@ -13,8 +13,9 @@ public class Game {
     public int wolfskilled = 0;
     public int grasseaten =0;
     public int humankilled =0;
+    final int grassSpeedGrowth = 1;
     private int day = 0;
-    ArrayList<entity> entities = new ArrayList<entity>();
+    ArrayList<animal> entities = new ArrayList<animal>();
     ArrayList<Save> saves = new ArrayList<Save>();
 
     public static void main(String[] args) {
@@ -153,11 +154,11 @@ public class Game {
     public boolean spawnEntity(int x, int y, char type) {
         if(type != 'g' && entityMap[x][y] != ' ') return false;
         switch (type) {
-            case 'g':
-                //System.out.println("ustawiam " + x + " " + y + " " + type);
-                grass g = new grass(x, y, this);
-                entities.add(g);
-                break;
+//            case 'g':
+//                //System.out.println("ustawiam " + x + " " + y + " " + type);
+//                grass g = new grass(x, y, this);
+//                entities.add(g);
+//                break;
             case 'h':
                 //System.out.println("ustawiam " + x + " " + y + " " + type);
                 human h = new human(x, y, this);
@@ -180,7 +181,7 @@ public class Game {
     }
 
     public void growGrass(){
-        for(int i = 0; i< sizeMapx; i++){
+        for(int i = 0; i< sizeMapx*grassSpeedGrowth; i++){
             int ax = (int) (Math.random() * sizeMapx);
             int ay = (int) (Math.random() * sizeMapy);
             if(terrain[ax][ay] == ' ') {
@@ -208,7 +209,7 @@ public class Game {
         this.entityMap[ax][ay] = type;
     }
 
-    public ArrayList<entity> getEntities() {
+    public ArrayList<animal> getEntities() {
         return entities;
     }
     public char[][] getTerrain() {

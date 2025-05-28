@@ -1,31 +1,77 @@
 package entities;
 
-import Game.Game;
 import Game.Pos;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 public class animal extends entity{
     public int health;
     public int food;
     boolean isHunting = false;
+    boolean isReproducing = false;
     char[] targets;
-    int prgoress = 0;
+    public int progress = 0;
 
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
 
 
 
 
 
     public void populate(char type) {
+        //System.out.println("rozmnaza sie");
+        Pos pos = check(new char[]{this.type} ,1);
 
-        Pos free = check(new char[]{' '}, 1);
-        if (free != null) {
-            food -= 40;
-            prgoress = 0;
-            game.spawnEntity(free.x,free.y,type); //do zmiany
+        if(pos != null ){
+            //System.out.println(name +" ("+x+ ", " + y+ ") rozmnaza sie z ("+ pos.x + ", " + pos.y+")");
+            //game.setMapentity(pos.x, pos.y, ' ');
+
+            pos = check(new char[]{' '} ,1);
+            game.spawnEntity(pos.x,pos.y,type); //do zmiany
+            for (animal e: game.getEntities()) {
+                if (e != this && pos.x == e.x && pos.y == e.y && e.type == type) {
+                   // System.out.println(this.name + " zjada " + pos.x + " " + pos.y );
+                    e.setProgress(0);
+                    this.isReproducing = false;
+                    food -= 40;
+                    progress = 0;
+                    System.out.println(name +" ("+x+ ", " + y+ ") rozmnaza sie z "+ e.name +" (" + x + ", " + pos.y+")");
+                    e.isHunting = false;
+                    break;
+                }
+            }
+            return;
         }
+        pos = check(new char[]{this.type},Math.max(game.getTerrain()[0].length, game.getTerrain().length));
+
+        int ax = 0, ay =0;
+        if (pos == null) {
+            //System.out.println("nie znaleziono zwierze " + this.type);
+            return;
+        }       //System.out.println(" znaleziono zwierze do populacji "+ pos.x + " " + pos.y);
+        if ( x  == pos.x) {
+            if (y  -pos.y > 0) {
+                ay = -2;
+            }else ay =2;
+        }else if( y == pos.y ) {
+            if (x  -pos.x > 0) {
+                ax = -2;
+            }else ax = 2;
+        }else {
+            if (x > pos.x){
+                ax = -2;
+            }else {
+                ax = 2;
+            }
+            if (y > pos.y){
+                ay = -2;
+            } else {
+                ay = 2;
+            }
+        }
+        //System.out.println("ruch w kiuerunku ofiary " +ax +" " +ay+ " "+ type + " " + pos.x + " " + pos.y);
+        move(ax,ay,type);
     }
 
 
@@ -68,7 +114,8 @@ public class animal extends entity{
             }
             for (entity e: game.getEntities()) {
                 if (e != this && pos.x == e.x && pos.y == e.y) {
-                    System.out.println(this.name + " zjada " + pos.x + " " + pos.y );
+                    System.out.println(this.name + "" +
+                            " zjada " + e.name+" "+ pos.x + " " + pos.y );
                     e.die();
                     this.food += 60;
                     break;
@@ -116,16 +163,17 @@ public class animal extends entity{
                 int ax = x + dx;
                     for (int dy = -1-r; dy <= 1+r; dy++) {
                         int ay = y + dy;
+                        if (dx==0 && dy==0) continue;
                         //System.out.println(ax + " " + ay);
-                            if(Math.abs(dx)<r||Math.abs(dy) <r) continue;
-                            if (game.checkborder(ax, ay)) {
-                                for (char t : target) {
-                                    if (game.getEntityMap()[ax][ay] == t || game.getTerrain()[ax][ay] == t) {
-                                        //System.out.print(game.getEntityMap()[ax][ay]);
-                                        return new Pos(ax, ay);
-                                    }
+                        if(Math.abs(dx)<r||Math.abs(dy) <r) continue;
+                        if (game.checkborder(ax, ay)) {
+                            for (char t : target) {
+                                if (game.getEntityMap()[ax][ay] == t || game.getTerrain()[ax][ay] == t) {
+                                    //System.out.print(game.getEntityMap()[ax][ay]);
+                                    return new Pos(ax, ay);
                                 }
                             }
+                        }
                     }
             }
         }
@@ -143,18 +191,20 @@ public class animal extends entity{
             return;
         }
         if (food >0) {
-            food = food - 10;
+            food = food - 8;
         }
-        if (food < 60){
-            isHunting = true;
-        }
-        if (food < 10) health = health - 10;
-        if (food >70) {
-            prgoress++;
-        }
-        if (prgoress == 3){
-            populate(type);
 
+        if (food < 10) health = health - 10;
+        if (food >70 && Math.random() < 0.5 ) {
+            progress++;
+        }
+        if (progress >= 2) {
+            isReproducing=true;
+            populate(type);
+        }
+        if (food < 40){
+            isReproducing=false;
+            isHunting = true;
         }
         if (isHunting) {
             hunt(this.targets);
