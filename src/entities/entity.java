@@ -18,13 +18,29 @@ public abstract class entity {
     public int getY() {
         return y;
     }
+
+
     public void die(){
         System.out.println("umarł " + this.name + " " + this.x + " " + this.y);
-        if(this instanceof wolf) game.wolfskilled++;
-        if (this instanceof sheep) game.sheepskilled++;
-        if (this instanceof human) game.humankilled++;
-        if(this instanceof  grass) game.grasseaten++;
+//        if (this instanceof grass){
+//            game.grasseaten +=1;
+//            grass.ammount --;
+//        }
+        if (this instanceof sheep) {
+            game.sheepskilled += 1;
+            sheep.ammount --;
+        }
+        if (this instanceof wolf) {
+            game.wolfskilled += 1;
+            wolf.ammount -= 1;
+        }
+        if (this instanceof human) {
+            game.humankilled +=1;
+            human.ammount -= 1;
+        }
+
         game.despawnEntity(this);
+
     }
 }
 

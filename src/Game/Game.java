@@ -1,22 +1,21 @@
 package Game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 import entities.*;
+import Game.*;
 
 public class Game {
     int sizeMapx, sizeMapy;
     public char[][] terrain;
     public char[][] entityMap;
-    private int days;
     public int sheepskilled = 0;
     public int wolfskilled = 0;
     public int grasseaten =0;
     public int humankilled =0;
-
+    private int day = 0;
     ArrayList<entity> entities = new ArrayList<entity>();
-
+    ArrayList<Save> saves = new ArrayList<Save>();
 
     public static void main(String[] args) {
         Game g = new Game();
@@ -31,50 +30,67 @@ public class Game {
         int wolfCount = Integer.parseInt(sc.nextLine());
         System.out.print("Podaj liczbę ludzi: ");
         int humanCount = Integer.parseInt(sc.nextLine());
+        System.out.println("podaj liczbe dni");
+        int days = Integer.parseInt(sc.nextLine());
         g.sizeMapx = width;
         g.sizeMapy = height;
         g.terrain = new char[width][height];
         g.entityMap = new char[width][height];
 
-
         g.initStart(sheepCount,wolfCount,humanCount);
-        g.gameLopp();
+        g.gameLopp(days);
     }
 
-    public void gameLopp() {
+
+
+    public void gameLopp(int days) {
         boolean loop = true;
-        int day = 0;
+        boolean ignorePreq = false;
+
         Scanner sc = new Scanner(System.in);
         System.out.println("dzień = " + day);
         writeMap();
+        saves.add(new Save(day,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
         day++;
+
         while (loop) {
             System.out.println("dzień = " + day);
-            refreshWorld();
-            List<entity> copy = new ArrayList<>(entities);
-            for (entity e : copy) {
-                e.update();
-            }
 
+            refreshWorld();
+            growGrass();
+            List<entity> copy = new ArrayList<>(entities);
+            for (entity e : copy) e.update();
+            saves.add(new Save(day,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
             refreshWorld();
             writeMap();
-
-            //int input = Integer.parseInt(sc.nextLine());
-            //if (input == 1)=
             day++;
-            if (day > 40) loop = false;
-        }
+            if ( wolf.ammount ==0 &&sheep.ammount ==0&& human.ammount== 0 && !ignorePreq ){
+                System.out.println("zwierzeta wymarły w " +day+ " czy kontnuowac symulacje: 0 - nie  1-tak");
+                int input = Integer.parseInt(sc.nextLine());
+                if (input == 0){
+                    loop = false;
 
+                }else {
+                    ignorePreq = true;
+                    continue;
+                }
+            }
+            if (day > days) loop = false;
+
+        }
+        Save.saveCsv(saves);
+        System.out.println("umarło " + sheepskilled + " owc ");
+        System.out.println("umarło " + humankilled + " ludzi ");
+        System.out.println("umarło " + wolfskilled + " wilków ");
     }
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
-                if (Math.random()<0.1) {
-                    spawnEntity(x,y,'g');
-                }else terrain[x][y] = ' ';
+                terrain[x][y] = ' ';
                 entityMap[x][y] = ' ';
             }
         }
+        growGrass();
         entityGen(sheepCount, 's');
         entityGen(wolfCount, 'w');
         entityGen(humanCount, 'h');
@@ -83,11 +99,9 @@ public class Game {
         int counted =0;
         int randx, randy;
         while (counted<  count){
-
             randx = (int) (Math.random() * sizeMapx);
             randy = (int) (Math.random() * sizeMapy);
             //System.out.println("spawn" + randx +" " + randy + " " + type);
-
             if(spawnEntity(randx, randy, type)) counted++;
         }
     }
@@ -101,12 +115,11 @@ public class Game {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
                 entityMap[x][y] = ' ';
-                terrain[x][y] = ' ';
             }
         }
         for(entity e : entities) {
             if (e instanceof animal) entityMap[e.getX()][e.getY()] = e.type;
-            if(e instanceof  grass) terrain[e.getX()][e.getY()] = '■';
+           // if(e instanceof  grass) terrain[e.getX()][e.getY()] = '■';
         }
 
     }
@@ -137,8 +150,6 @@ public class Game {
         return ax >= 0 && ax < sizeMapx && ay >= 0 && ay < sizeMapy;
     }
 
-
-
     public boolean spawnEntity(int x, int y, char type) {
         if(type != 'g' && entityMap[x][y] != ' ') return false;
         switch (type) {
@@ -168,16 +179,22 @@ public class Game {
         return true;
     }
 
-
-    public void despawnEntity(entity et) {
-        if (et instanceof grass) {
-            terrain[et.getX()][et.getY()] = ' ';
-
+    public void growGrass(){
+        for(int i = 0; i< sizeMapx; i++){
+            int ax = (int) (Math.random() * sizeMapx);
+            int ay = (int) (Math.random() * sizeMapy);
+            if(terrain[ax][ay] == ' ') {
+                terrain[ax][ay] = 'g';
+                grass.ammount++;
+            }
         }
+    }
+    public void despawnEntity(entity et) {
         if (et instanceof animal) {
             entityMap[et.getX()][et.getY()] = ' ';
         }
         entities.remove(et);
+
     }
 
 

@@ -5,7 +5,7 @@ import Game.Dir;
 
 public class grass extends entity {
     int growth = 0;
-
+    static public int ammount = 0;
 
     public grass(int x, int y, Game game) {
         this.x = x;
@@ -14,7 +14,7 @@ public class grass extends entity {
         this.name = "grass";
         this.game.setTerrain(x,y,'g');
         this.type = 'g';
-
+        ammount +=1 ;
     }
 
     @Override
