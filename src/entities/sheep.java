@@ -5,6 +5,12 @@ import Game.Game;
 public class sheep extends animal{
     static public int ammount = 0;
     static private int id =0;
+    /**
+     * Owca
+     * @param x koordynat x
+     * @param y koordynat y
+     * @param game wskazanie gry
+     */
     public sheep(int x, int y, Game game) {
         id++;
         this.x = x;

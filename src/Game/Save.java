@@ -18,6 +18,18 @@ public class Save {
     public int killedhuman;
     public int killedgrass;
 
+    /**
+     * tworzenie klasy ktora zawiera dane o symulacji
+     * @param day koordynat x
+     *@param wolf liczba wilków podczas danego dnia
+     * @param sheep liczba owiec podczas danego dnia
+     * @param human liczba ludzi podczas danego dnia
+     * @param grass liczba trawy podczas danego dnia
+     * @param grasseaten liczba zjedzonej trawy podczas danego dnia
+     *  @param killedwolf liczba zabitych wilków podczas danego dnia
+     * @param killedhuman liczba zabitych  podczas danego dnia
+     *@param killedsheep liczba zabitych owiec podczas danego dnia
+     */
     public Save(int day, int wolf, int sheep, int human, int grass, int killedwolf, int killedsheep, int killedhuman, int grasseaten) {
         this.day = day;
         this.wolf = wolf;

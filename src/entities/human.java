@@ -5,6 +5,12 @@ import Game.Game;
 public class human extends animal {
     static public int ammount = 0;
     static private int id =0;
+    /**
+     * Człowiek
+     * @param x koordynat x
+     * @param y koordynat y
+     * @param game wskazanie gry
+     */
     public human(int x, int y, Game game) {
         super();
         id++;

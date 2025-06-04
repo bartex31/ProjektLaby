@@ -46,8 +46,10 @@ public class Game {
 
 
 
-
-    //pętla gry
+    /**
+     * głowna pęta symulacji
+     * @param days iloś dni symulacji
+     */
     public void gameLopp(int days) {
         boolean loop = true;
         boolean ignorePreq = false;
@@ -89,7 +91,13 @@ public class Game {
         System.out.println("umarło " + wolfskilled + " wilków ");
     }
 
-    //inicjowanie tablic i tworzenie początkowych zwierząc przez podaną ilośc zwierząt
+
+    /**
+     * inicjowanie tablic i tworzenie początkowych zwierząc przez podaną ilośc zwierząt
+     * @param sheepCount iloś owiec
+     * @param wolfCount iloś wilków
+     * @param humanCount iloś ludzi
+     */
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
@@ -103,7 +111,12 @@ public class Game {
         entityGen(humanCount, 'h');
     }
 
-    //tworzenie zwierzaw w losowe miejsca
+
+    /**
+     * tworzenie entity w zależnośc od rodzaju i liczby
+     * @param count iloś entity
+     * @param type rodzaj entity do spawnu
+          */
     private void entityGen(int count , char type) {
         int counted =0;
         int randx, randy;
@@ -118,8 +131,9 @@ public class Game {
 
 
 
-
-
+    /**
+     * odświerza tablice i na podstawie entity w liscie podaje nowe zwierzeta
+     */
     private void refreshWorld() {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
@@ -132,6 +146,9 @@ public class Game {
         }
 
     }
+    /**
+     * drukuje w konsoli mape
+     */
     private void writeMap() {
         System.out.print("   |");
         for (int test =0 ; test < sizeMapx ; test++) {
@@ -156,13 +173,27 @@ public class Game {
 
 
 
-    //funckja zwraca true gdy podany ax i ay zawierają sie w rozmiarze tablicy
+    /**
+     * zwraca true gdy podane ax i ay nie wychodzi z tablicy
+     * @param ax koordynat x
+     * @param ay koordynat y
+     * @return true/false
+     */
     public boolean checkborder(int ax, int ay) {
         return ax >= 0 && ax < sizeMapx && ay >= 0 && ay < sizeMapy;
     }
 
 
-    //tworzenie zwierząt
+
+    /**
+     * tworzenie trawy zwierzecia zależnego od type
+     * type = h pojawia sie czlowiek,
+     * type = s pojawia sie owca,
+     * type = w pojawia sie wilk
+     * @param x koordynatx
+     * @param type typ entity 'h,s,w'
+     * @param y koordynat y
+     */
     public boolean spawnEntity(int x, int y, char type) {
         if(type != 'g' && entityMap[x][y] != ' ') return false;
         switch (type) {
@@ -193,7 +224,11 @@ public class Game {
     }
 
 
-    //tworzenie trawy w ilości zależnej od rozmiaru mapy
+
+
+    /**
+     * tworzenie trawy w ilości zależnej od rozmiaru mapy
+     */
     public void growGrass(){
         for(int i = 0; i< sizeMapx*grassSpeedGrowth; i++){
             int ax = (int) (Math.random() * sizeMapx);
@@ -206,7 +241,10 @@ public class Game {
     }
 
 
-    //usuwanie na tablicy i z listy entity
+    /**
+     * usuwa entity et z listy i tablicy entity
+     * @param et entity
+     */
     public void despawnEntity(entity et) {
         if (et instanceof animal) {
             entityMap[et.getX()][et.getY()] = ' ';
@@ -217,21 +255,50 @@ public class Game {
 
 
 
+    /**
+     * podaje wartośc x
+     * @return  x
+     */
     public char[][] getEntityMap() {
         return entityMap;
     }
 
+    /**
+     * ustawia wartośc z w tablicy[x][y]
+     * @param ax parametr x
+     *@param ay parametr y
+     * @param type parametr typu charakteru wstawienia do tablicy zwierząt
+     */
     public void setMapentity(int ax, int ay, char type) {
         //System.out.println("ustawiam " + ax + " " + ay + " " + type);
         this.entityMap[ax][ay] = type;
     }
 
+    /**
+     * zwraca tabice zwierząt
+     * @return  tablica entities
+     */
     public ArrayList<animal> getEntities() {
         return entities;
     }
+
+
+    /**
+     * zwraca tabice terenu
+     * @return  tablica terenu
+     */
     public char[][] getTerrain() {
         return terrain;
     }
+
+
+
+    /**
+     * ustawia wartośc z w tablicy[x][y] do tablicy tereny
+     * @param x parametr x
+     *@param y parametr y
+     * @param z parametr typu charakteru wstawienia
+     */
     public void setTerrain(int x, int y, char z) {
         terrain[x][y] = z;
     }

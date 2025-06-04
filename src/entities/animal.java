@@ -11,6 +11,10 @@ public class animal extends entity{
     public int progress = 0;
 
 
+    /**
+     * ustawia progress zwierzęcia
+     * @param progress liczba progresu
+     */
     public void setProgress(int progress) {
         this.progress = progress;
     }
@@ -18,7 +22,11 @@ public class animal extends entity{
 
 
 
-    //rozmnażanie zwierzęcia gdy znajdzie takie same zwierze i zacznie iśc w jego kierunku
+
+    /**
+     * rozmnażanie zwierzęcia gdy znajdzie takie same zwierze i zacznie iśc w jego kierunku
+     * @param type typ zwierzęcia
+     */
     public void populate(char type) {
         //System.out.println("rozmnaza sie");
         Pos pos = check(new char[]{this.type} ,1);
@@ -74,7 +82,13 @@ public class animal extends entity{
         move(ax,ay,type);
     }
 
-    //poruszanie sie o ax  i ay i podanie type
+
+    /**
+     * poruszanie sie o ax  i ay i podanie type
+     * @param ax o ile ma sie poruszyc w osi x
+     * @param ay o ile ma sie poruszyc w osi y
+     * @param type typ zwierzęcia
+     */
     public void move(int ax, int ay, char type) {
 
         if (game.checkborder(x +ax,y+ay) && game.getEntityMap()[x +ax][y+ay] == ' ') {
@@ -87,7 +101,12 @@ public class animal extends entity{
         }
     }
 
-    //podaje  losowwe koordynaty x,y w zakresie -2,2
+    //
+
+    /**
+     * podaje  losowwe koordynaty x,y zwierzęcia w zakresie -2,2
+     * @return Pos klase pos z wartoscią x i y
+     */
     public Pos randpos(){
         Pos pos;
         for (int i=0; i< 15;i++){
@@ -97,7 +116,10 @@ public class animal extends entity{
         return new Pos(0,0);
     }
 
-
+    /**
+     * zwierze zacznie polowac na ofiare, szuka ją po czym zaczyna do niej iść
+     * @param target  podajemy tablice ceów polowania
+     */
     public void hunt(char[] target) {
         Pos pos = check(target,1);
 
@@ -156,7 +178,12 @@ public class animal extends entity{
         move(ax,ay,type);
     }
 
-    //sprawdza tablice i miejsce na około entity o zasiegu (range)
+    //
+    /**
+     * sprawdza tablice i miejsce na około entity o zasiegu (range)
+     * @param target  podajemy tablice ceów polowania
+     * @param range zasieg poszukiwania
+     */
     public Pos check(char[] target, int range) {
 
 
@@ -183,7 +210,9 @@ public class animal extends entity{
         return null;
     }
 
-
+    /**
+     * logika zwierzęcia
+     */
     @Override
     public void update() {
         if(!game.getEntities().contains(this)) return;

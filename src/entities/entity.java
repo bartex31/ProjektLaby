@@ -12,16 +12,29 @@ public abstract class entity {
 
     abstract public void update();
 
+
+    /**
+     * podaje wartośc x
+    * @return  x
+     */
     public int getX() {
         return x;
     }
+    /**
+     * podaje wartośc y
+     * @return  y
+     */
     public int getY() {
         return y;
     }
 
 
 
-    //wywoływanie znikania entity
+
+    /**
+     * zabija zwierze i zmienia licznik danego zwierzęcia i dodaje do zabityh zwierząt i usuwa z listy
+
+     */
     public void die(){
         System.out.println("umarł " + this.name + " " + this.x + " " + this.y);
 //        if (this instanceof grass){

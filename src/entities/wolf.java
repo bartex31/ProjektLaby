@@ -5,6 +5,12 @@ import Game.Pos;
 public class wolf extends animal {
     static public int ammount = 0;
     static private int id =0;
+    /**
+     * wilk
+     * @param x koordynat x
+     * @param y koordynat y
+     * @param game wskazanie gry
+     */
     public wolf(int x, int y, Game game) {
         this.x = x;
         id++;

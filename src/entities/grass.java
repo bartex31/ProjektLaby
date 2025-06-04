@@ -5,6 +5,12 @@ import Game.Game;
 public class grass extends entity {
     static public int ammount = 0;
 
+    /**
+     * trawa
+     * @param x koordynat x
+     * @param y koordynat y
+     * @param game wskazanie gry
+     */
     public grass(int x, int y, Game game) {
         this.x = x;
         this.y = y;
