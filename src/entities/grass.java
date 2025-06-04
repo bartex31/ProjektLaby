@@ -1,8 +1,13 @@
 package entities;
 
 import Game.Game;
-
+/**
+ * klasa trawy
+ */
 public class grass extends entity {
+    /**
+     * liczba istniejących traw
+     */
     static public int ammount = 0;
 
     /**

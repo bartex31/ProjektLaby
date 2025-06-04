@@ -1,9 +1,17 @@
 package entities;
 import Game.Game;
 import Game.Pos;
-
+/**
+ * klasa wilka
+ */
 public class wolf extends animal {
+    /**
+     * liczba żywych wilków
+     */
     static public int ammount = 0;
+    /**
+     * id wilka
+     */
     static private int id =0;
     /**
      * wilk

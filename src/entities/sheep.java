@@ -1,9 +1,17 @@
 package entities;
 
 import Game.Game;
-
+/**
+ * klasa owcy
+ */
 public class sheep extends animal{
+    /**
+     * liczba żywych owiec
+     */
     static public int ammount = 0;
+    /**
+     * id owcy
+     */
     static private int id =0;
     /**
      * Owca

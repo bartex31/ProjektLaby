@@ -1,13 +1,27 @@
 package entities;
 
 import Game.Pos;
-
+/**
+ * klasa podrzędna entity i jest klasą nadrzędną dla wszystkich zwierząt
+ */
 public class animal extends entity{
+    /**
+     * ilość życia zwierzęcia
+     */
     public int health;
+    /**
+     * poziom żywności zwierzęcia
+     */
     public int food;
     boolean isHunting = false;
     boolean isReproducing = false;
+    /**
+     * tablica zawierająca cele podczas polowania
+     */
     char[] targets;
+    /**
+     * postęp do rozmnażania
+     */
     public int progress = 0;
 
 
@@ -183,6 +197,7 @@ public class animal extends entity{
      * sprawdza tablice i miejsce na około entity o zasiegu (range)
      * @param target  podajemy tablice ceów polowania
      * @param range zasieg poszukiwania
+     * @return pos(x,y)
      */
     public Pos check(char[] target, int range) {
 

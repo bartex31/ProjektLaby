@@ -3,23 +3,53 @@ package Game;
 import java.util.*;
 
 import entities.*;
-import Game.*;
-//
+
+
+/**
+ * klasa symulacji
+ */
 public class Game {
+    /**
+     * rozmiar mapy
+     */
     int sizeMapx, sizeMapy;
+    /**
+     * tablica zaiwerająca symbole terenu
+     */
     public char[][] terrain;
+    /**
+     * tablica zawierająca symbole zwierząt
+     */
     public char[][] entityMap;
+    /**
+     * liczba zmarłych owiec
+     */
     public int sheepskilled = 0;
+    /**
+     * liczba zmarłych wilków
+     */
     public int wolfskilled = 0;
+    /**
+     * liczba zjedzonych traw
+     */
     public int grasseaten =0;
+    /**
+     * liczba zmarłych ludzi
+     */
     public int humankilled =0;
-    final int grassSpeedGrowth = 1;
-    private int day = 0;
+    /**
+     * licznik oznaczający ktory jest dzien symulacjio
+     */
+    private int currentDay = 0;
+    /**
+     * lista zawierajaca zwierzeta
+     */
     ArrayList<animal> entities = new ArrayList<animal>();
+    /**
+     * lista zawierajaca zbiór klass save posiadająca dane symulacji na dany dzien
+     */
     ArrayList<Save> saves = new ArrayList<Save>();
 
-
-    //uzytkownik podaje potrzebne dane do symulacji
     public static void main(String[] args) {
         Game g = new Game();
         Scanner sc = new Scanner(System.in);
@@ -45,34 +75,33 @@ public class Game {
     }
 
 
-
     /**
-     * głowna pęta symulacji
-     * @param days iloś dni symulacji
+     * głowna pętla symulacji
+     * @param days entity
      */
     public void gameLopp(int days) {
         boolean loop = true;
         boolean ignorePreq = false;
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("dzień = " + day);
+        System.out.println("dzień = " + currentDay);
         writeMap();
-        saves.add(new Save(day,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
-        day++;
+        saves.add(new Save(currentDay,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
+        currentDay++;
 
         while (loop) {
-            System.out.println("dzień = " + day);
+            System.out.println("dzień = " + currentDay);
 
             refreshWorld();
             growGrass();
             List<entity> copy = new ArrayList<>(entities);
             for (entity e : copy) e.update();
-            saves.add(new Save(day,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
+            saves.add(new Save(currentDay,wolf.ammount,sheep.ammount,human.ammount,grass.ammount,wolfskilled,sheepskilled,humankilled,grasseaten));
             refreshWorld();
             writeMap();
-            day++;
+            currentDay++;
             if ( wolf.ammount ==0 &&sheep.ammount ==0&& human.ammount== 0 && !ignorePreq ){
-                System.out.println("zwierzeta wymarły w " +day+ " czy kontnuowac symulacje: 0 - nie  1-tak");
+                System.out.println("zwierzeta wymarły w " + currentDay + " czy kontnuowac symulacje: 0 - nie  1-tak");
                 int input = Integer.parseInt(sc.nextLine());
                 if (input == 0){
                     loop = false;
@@ -82,7 +111,7 @@ public class Game {
                     continue;
                 }
             }
-            if (day > days) loop = false;
+            if (currentDay > days) loop = false;
 
         }
         Save.saveCsv(saves);
@@ -90,14 +119,6 @@ public class Game {
         System.out.println("umarło " + humankilled + " ludzi ");
         System.out.println("umarło " + wolfskilled + " wilków ");
     }
-
-
-    /**
-     * inicjowanie tablic i tworzenie początkowych zwierząc przez podaną ilośc zwierząt
-     * @param sheepCount iloś owiec
-     * @param wolfCount iloś wilków
-     * @param humanCount iloś ludzi
-     */
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
@@ -110,13 +131,6 @@ public class Game {
         entityGen(wolfCount, 'w');
         entityGen(humanCount, 'h');
     }
-
-
-    /**
-     * tworzenie entity w zależnośc od rodzaju i liczby
-     * @param count iloś entity
-     * @param type rodzaj entity do spawnu
-     */
     private void entityGen(int count , char type) {
         int counted =0;
         int randx, randy;
@@ -131,9 +145,8 @@ public class Game {
 
 
 
-    /**
-     * odświerza tablice i na podstawie entity w liscie podaje nowe zwierzeta
-     */
+
+
     private void refreshWorld() {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
@@ -146,9 +159,6 @@ public class Game {
         }
 
     }
-    /**
-     * drukuje w konsoli mape
-     */
     private void writeMap() {
         System.out.print("   |");
         for (int test =0 ; test < sizeMapx ; test++) {
@@ -171,8 +181,6 @@ public class Game {
         }
     }
 
-
-
     /**
      * zwraca true gdy podane ax i ay nie wychodzi z tablicy
      * @param ax koordynat x
@@ -182,17 +190,15 @@ public class Game {
     public boolean checkborder(int ax, int ay) {
         return ax >= 0 && ax < sizeMapx && ay >= 0 && ay < sizeMapy;
     }
-
-
-
     /**
-     * tworzenie trawy zwierzecia zależnego od type<br>
+     * tworzenie zwierzecia zależnego od type<br>
      * type = h pojawia sie czlowiek,<br>
      * type = s pojawia sie owca,<br>
      * type = w pojawia sie wilk
      * @param x koordynatx
      * @param type typ entity 'h,s,w'
      * @param y koordynat y
+     * @return zwraca true gdy tworzenie nie zadziałało
      */
     public boolean spawnEntity(int x, int y, char type) {
         if(type != 'g' && entityMap[x][y] != ' ') return false;
@@ -222,15 +228,11 @@ public class Game {
         }
         return true;
     }
-
-
-
-
     /**
      * tworzenie trawy w ilości zależnej od rozmiaru mapy
      */
     public void growGrass(){
-        for(int i = 0; i< sizeMapx*grassSpeedGrowth; i++){
+        for(int i = 0; i< sizeMapx; i++){
             int ax = (int) (Math.random() * sizeMapx);
             int ay = (int) (Math.random() * sizeMapy);
             if(terrain[ax][ay] == ' ') {
@@ -239,8 +241,6 @@ public class Game {
             }
         }
     }
-
-
     /**
      * usuwa entity et z listy i tablicy entity
      * @param et entity
@@ -252,7 +252,6 @@ public class Game {
         entities.remove(et);
 
     }
-
 
 
     /**
@@ -269,6 +268,7 @@ public class Game {
      *@param ay parametr y
      * @param type parametr typu charakteru wstawienia do tablicy zwierząt
      */
+
     public void setMapentity(int ax, int ay, char type) {
         //System.out.println("ustawiam " + ax + " " + ay + " " + type);
         this.entityMap[ax][ay] = type;
@@ -281,8 +281,6 @@ public class Game {
     public ArrayList<animal> getEntities() {
         return entities;
     }
-
-
     /**
      * zwraca tabice terenu
      * @return  tablica terenu
@@ -290,9 +288,6 @@ public class Game {
     public char[][] getTerrain() {
         return terrain;
     }
-
-
-
     /**
      * ustawia wartośc z w tablicy[x][y] do tablicy tereny
      * @param x koorydnat x

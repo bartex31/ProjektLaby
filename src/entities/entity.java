@@ -2,11 +2,29 @@ package entities;
 
 import Game.Game;
 
+/**
+ * klasa bazowa dla wszystklich zwierząt
+ */
 public abstract class entity {
+    /**
+     * nazwa zwierzecia/obiektu
+     */
     public String name;
+    /**
+     * pozycja x na planszy
+     */
     protected int x;
+    /**
+     * pozycja y na planszy
+     */
     protected int y;
+    /**
+     * referencja do obiektu symulacji
+     */
     protected Game game;
+    /**
+     * symbol obiektu/zwierzęcia
+     */
     public char type;
 
 

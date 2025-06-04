@@ -6,16 +6,46 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+/**
+ * klasa zawierająca dane o symulacji
+ */
 public class Save {
-    public int wolf;
-    public int sheep;
-    public int human;
-    public int grass;
+
+    /**
+     * liczba oznaczajaca dzien symulacji
+     */
     public int day;
+    /**
+     * liczba wilków podczas danego dnia
+     */
+    public int wolf;
+    /**
+     * liczba owiec podczas danego dnia
+     */
+    public int sheep;
+    /**
+     * liczba ludzi podczas danego dnia
+     */
+    public int human;
+    /**
+     * liczba trawy podczas danego dnia
+     */
+    public int grass;
+    /**
+     * liczba zabitych wilków podczas danego dnia
+     */
     public int killedwolf;
+    /**
+     *  liczba zabitych owiec podczas danego dnia
+     */
     public int killedsheep;
+    /**
+     * liczba zabitych ludzi podczas danego dnia
+     */
     public int killedhuman;
+    /**
+     * klasa liczba trawy podczas danego dnia
+     */
     public int killedgrass;
 
     /**
@@ -42,7 +72,11 @@ public class Save {
         this.killedgrass = grasseaten;
     }
 
-    //zapisywanie wyników z listy saves do pliku csv
+
+    /**
+     * zapisywanie wyników z listy saves do pliku csv
+     * @param saves lista klas Save
+     */
     public static void saveCsv(ArrayList<Save> saves) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss"));
         try(FileWriter writer = new FileWriter(date+ ".csv", true);) {

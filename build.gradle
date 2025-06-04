@@ -27,3 +27,12 @@ sourceSets {
 application {
     mainClass = 'Game.Game'
 }
+tasks.named('run') {
+    standardInput = System.in
+}
+javadoc {
+    options.overview = file("src/overview.html").absolutePath
+}
+tasks.withType(Javadoc).configureEach { options.encoding = 'UTF-8'
+    destinationDir = file("$buildDir/docs/javadoc")
+}

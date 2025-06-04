@@ -2,8 +2,17 @@ package entities;
 
 import Game.Game;
 
+/**
+ * klasa człowieka
+ */
 public class human extends animal {
+    /**
+     * liczba żywych ludzi
+     */
     static public int ammount = 0;
+    /**
+     * id człowieka
+     */
     static private int id =0;
     /**
      * Człowiek
