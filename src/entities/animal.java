@@ -18,7 +18,7 @@ public class animal extends entity{
 
 
 
-
+    //rozmnażanie zwierzęcia gdy znajdzie takie same zwierze i zacznie iśc w jego kierunku
     public void populate(char type) {
         //System.out.println("rozmnaza sie");
         Pos pos = check(new char[]{this.type} ,1);
@@ -74,7 +74,7 @@ public class animal extends entity{
         move(ax,ay,type);
     }
 
-
+    //poruszanie sie o ax  i ay i podanie type
     public void move(int ax, int ay, char type) {
 
         if (game.checkborder(x +ax,y+ay) && game.getEntityMap()[x +ax][y+ay] == ' ') {
@@ -87,6 +87,7 @@ public class animal extends entity{
         }
     }
 
+    //podaje  losowwe koordynaty x,y w zakresie -2,2
     public Pos randpos(){
         Pos pos;
         for (int i=0; i< 15;i++){
@@ -154,6 +155,8 @@ public class animal extends entity{
         //System.out.println("ruch w kiuerunku ofiary " +ax +" " +ay+ " "+ type + " " + pos.x + " " + pos.y);
         move(ax,ay,type);
     }
+
+    //sprawdza tablice i miejsce na około entity o zasiegu (range)
     public Pos check(char[] target, int range) {
 
 

@@ -30,6 +30,7 @@ public class Save {
         this.killedgrass = grasseaten;
     }
 
+    //zapisywanie wyników z listy saves do pliku csv
     public static void saveCsv(ArrayList<Save> saves) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss"));
         try(FileWriter writer = new FileWriter(date+ ".csv", true);) {

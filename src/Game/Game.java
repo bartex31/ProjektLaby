@@ -18,6 +18,8 @@ public class Game {
     ArrayList<animal> entities = new ArrayList<animal>();
     ArrayList<Save> saves = new ArrayList<Save>();
 
+
+    //uzytkownik podaje potrzebne dane do symulacji
     public static void main(String[] args) {
         Game g = new Game();
         Scanner sc = new Scanner(System.in);
@@ -44,6 +46,8 @@ public class Game {
 
 
 
+
+    //pętla gry
     public void gameLopp(int days) {
         boolean loop = true;
         boolean ignorePreq = false;
@@ -84,6 +88,8 @@ public class Game {
         System.out.println("umarło " + humankilled + " ludzi ");
         System.out.println("umarło " + wolfskilled + " wilków ");
     }
+
+    //inicjowanie tablic i tworzenie początkowych zwierząc przez podaną ilośc zwierząt
     private void initStart(int sheepCount, int wolfCount, int humanCount) {
         for (int x = 0; x < sizeMapx; x++) {
             for (int y = 0; y < sizeMapy; y++) {
@@ -96,6 +102,8 @@ public class Game {
         entityGen(wolfCount, 'w');
         entityGen(humanCount, 'h');
     }
+
+    //tworzenie zwierzaw w losowe miejsca
     private void entityGen(int count , char type) {
         int counted =0;
         int randx, randy;
@@ -147,10 +155,14 @@ public class Game {
     }
 
 
+
+    //funckja zwraca true gdy podany ax i ay zawierają sie w rozmiarze tablicy
     public boolean checkborder(int ax, int ay) {
         return ax >= 0 && ax < sizeMapx && ay >= 0 && ay < sizeMapy;
     }
 
+
+    //tworzenie zwierząt
     public boolean spawnEntity(int x, int y, char type) {
         if(type != 'g' && entityMap[x][y] != ' ') return false;
         switch (type) {
@@ -180,6 +192,8 @@ public class Game {
         return true;
     }
 
+
+    //tworzenie trawy w ilości zależnej od rozmiaru mapy
     public void growGrass(){
         for(int i = 0; i< sizeMapx*grassSpeedGrowth; i++){
             int ax = (int) (Math.random() * sizeMapx);
@@ -190,6 +204,9 @@ public class Game {
             }
         }
     }
+
+
+    //usuwanie na tablicy i z listy entity
     public void despawnEntity(entity et) {
         if (et instanceof animal) {
             entityMap[et.getX()][et.getY()] = ' ';

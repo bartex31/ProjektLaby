@@ -20,6 +20,8 @@ public abstract class entity {
     }
 
 
+
+    //wywoływanie znikania entity
     public void die(){
         System.out.println("umarł " + this.name + " " + this.x + " " + this.y);
 //        if (this instanceof grass){
