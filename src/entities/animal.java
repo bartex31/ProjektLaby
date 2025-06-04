@@ -104,7 +104,7 @@ public class animal extends entity{
     //
 
     /**
-     * podaje  losowwe koordynaty x,y zwierzęcia w zakresie -2,2
+     * podaje losowwe koordynaty(wektor) x,y zwierzęcia w zakresie -2,2
      * @return Pos klase pos z wartoscią x i y
      */
     public Pos randpos(){
