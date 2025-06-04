@@ -116,7 +116,7 @@ public class Game {
      * tworzenie entity w zależnośc od rodzaju i liczby
      * @param count iloś entity
      * @param type rodzaj entity do spawnu
-          */
+     */
     private void entityGen(int count , char type) {
         int counted =0;
         int randx, randy;
@@ -186,9 +186,9 @@ public class Game {
 
 
     /**
-     * tworzenie trawy zwierzecia zależnego od type
-     * type = h pojawia sie czlowiek,
-     * type = s pojawia sie owca,
+     * tworzenie trawy zwierzecia zależnego od type<br>
+     * type = h pojawia sie czlowiek,<br>
+     * type = s pojawia sie owca,<br>
      * type = w pojawia sie wilk
      * @param x koordynatx
      * @param type typ entity 'h,s,w'
@@ -295,8 +295,8 @@ public class Game {
 
     /**
      * ustawia wartośc z w tablicy[x][y] do tablicy tereny
-     * @param x parametr x
-     *@param y parametr y
+     * @param x koorydnat x
+     *@param y koorydnat y
      * @param z parametr typu charakteru wstawienia
      */
     public void setTerrain(int x, int y, char z) {
