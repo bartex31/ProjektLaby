@@ -4,7 +4,7 @@ import java.util.*;
 
 import entities.*;
 import Game.*;
-
+//
 public class Game {
     int sizeMapx, sizeMapy;
     public char[][] terrain;
